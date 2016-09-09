@@ -18,5 +18,7 @@ example
 =======
 
 ```JavaScript
+var vin = require('vin-lite');
 
+console.log(vin.isValid("WVWZZZ3CZEE140287")); // true
 ```
