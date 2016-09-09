@@ -1,0 +1,29 @@
+{
+  "name": "vin-lite",
+  "version": "1.0.0",
+  "description": "VIN (Vehicle Identification Number) Checker Lite",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/jasmine-node/lib/jasmine-node/cli.js spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApelSYN/node-vin-lite.git"
+  },
+  "devDependencies": {
+    "jasmine-node": "*"
+  },
+  "keywords": [
+    "VIN",
+    "Vehicle Identification Number"
+  ],
+  "author": "Oleg Cherniy <oleg.cherniy@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ApelSYN/node-vin-lite/issues"
+  },
+  "homepage": "https://github.com/ApelSYN/node-vin-lite#readme",
+  "engines": {
+    "node": ">=5.0.x"
+  }
+}
