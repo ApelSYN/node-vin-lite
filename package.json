@@ -1,6 +1,6 @@
 {
   "name": "vin-lite",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "VIN (Vehicle Identification Number) Checker Lite",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ApelSYN/node-vin-lite.git"
+  },
+  "dependencies": {
+    "mathjs": "*"
   },
   "devDependencies": {
     "jasmine-node": "*"
