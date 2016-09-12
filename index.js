@@ -20,15 +20,6 @@ module.exports = {
    decode: function decode (vin) {
       vin = vin.toUpperCase();
       let result = {}, wmi = vin.substr(0,3);
-      console.log(`wmi: ${wmi}`);
-      console.log(`vds: ${vin.substr(3,6)}`);
-      console.log(`vis: ${vin.substr(9)}`);
-      console.log(`SequentialNumber: ${vin.substr(11,6)}`);
-      console.log(`check: ${vin.substr(8,1)}`);
-      console.log(`continent: ${continents[vin.substr(0,1)]}`);
-      console.log(`country: ${continents[countries[vin.substr(0,2)]]}`);
-      console.log(`modelyear: ${modelyears[vin[9]]}`);
-
 
       if (vinRegex.test(vin)) {
          result = {
