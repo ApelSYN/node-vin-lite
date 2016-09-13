@@ -2,8 +2,7 @@ const vinRegex      = /^([0-9A-HJ-NPR-Z]{9})([A-HJ-NPR-TV-Z1-9])([0-9A-HJ-NPR-Z]
       continents    = require('./db/continents'),
       countries     = require('./db/countries'),
       modelyears    = require('./db/modelyears'),
-      hashify       = require('./lib/hashify'),
-      manufacturers = hashify(require('./data/manufacturers'))
+      manufacturers = require('./db/manufacturers')
     ;
 
 module.exports = {
@@ -26,16 +25,19 @@ module.exports = {
             wmi: wmi,
             vds: vin.substr(3,6),
             vis: vin.substr(9),
-            SequentialNumber: vin.substr(11,6),
+            sequentialNumber: vin.substr(11,6),
             check: vin.substr(8,1),
             continent: continents[vin.substr(0,1)],
             country: countries[vin.substr(0,2)],
             manufacturer: manufacturers[wmi],
             modelyear: modelyears[vin[9]]
          };
-         return result;
+      } else {
+         result = {
+            error: "VIN code is incorrect"
+         }
       }
-
+         return result;
    }
 };
 

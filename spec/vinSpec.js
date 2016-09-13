@@ -17,7 +17,11 @@ var vin = require('../'),
             'W0L0ZCF6848022377',
             'WDDEJ76X28A010315'
         ],
-        wrong: ['90WGDM9111P042788','1MIGDM9A5KP042788','1M8GDM9A5KP04278']
+        wrong: [
+            '90WGDM9111P042788',
+            '1MIGDM9A5KP042788',
+            '1M8GDM9A5KP04278'
+        ]
     };
 
 describe('Vin methods Tests / ', function () {
