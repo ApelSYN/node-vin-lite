@@ -30,7 +30,7 @@ module.exports = {
             continent: continents[vin.substr(0,1)],
             country: countries[vin.substr(0,2)],
             manufacturer: manufacturers[wmi],
-            modelyear: modelyears[vin[9]]
+            modelYear: modelyears[vin[9]]
          };
       } else {
          result = {

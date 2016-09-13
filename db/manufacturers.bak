@@ -1,0 +1,2092 @@
+const addRange = require('../lib/addRange'),
+      manufacturers = {
+    "935": "Citroën Brazil",
+    "936": "Peugeot Brazil",
+    "4TL": "Toyota",
+    "JMG": "Mazda",
+    "3GE": "General Motors Mexico",
+    "5TP": "Toyota USA - trucks",
+    "5F5": "Honda USA-Alabama",
+    "5LH": "Lincoln",
+    "1GP": "General Motors USA",
+    "KL9": "Daewoo General Motors South Korea",
+    "6AB": "MAN Australia",
+    "JMV": "Mazda",
+    "JM5": "Mazda",
+    "JFL": "Fuji Heavy Industries",
+    "5FX": "Honda USA-Alabama",
+    "1HK": "Honda USA",
+    "JAL": "Isuzu",
+    "MA1": "Mahindra",
+    "1NT": "Nissan USA",
+    "2M7": "Mercury",
+    "JSC": "Suzuki",
+    "VF6": "Renault (Trucks & Buses)",
+    "JM1": "Mazda",
+    "1N2": "Nissan USA",
+    "2TK": "Toyota Canada",
+    "1LZ": "Lincoln USA",
+    "2MC": "Mercury",
+    "JMM": "Mazda",
+    "2GZ": "General Motors Canada",
+    "JMT": "Mazda",
+    "3NM": "Nissan Mexico",
+    "ZFC": "Fiat V.I.",
+    "4ML": "Mercury",
+    "5FL": "Honda USA-Alabama",
+    "1NM": "Nissan USA",
+    "WV2": "Volkswagen Bus/Van",
+    "5FM": "Honda USA-Alabama",
+    "JSV": "Suzuki",
+    "JM6": "Mazda",
+    "5L9": "Lincoln",
+    "1N6": "Nissan USA",
+    "3P3": "Plymouth Mexico",
+    "JAT": "Isuzu",
+    "1GX": "General Motors USA",
+    "JNZ": "Nissan",
+    "TMT": "Tatra (Czech Republic)",
+    "2GD": "General Motors Canada",
+    "4T5": "Toyota",
+    "1FA": "Ford Motor Company",
+    "JHM": "Honda",
+    "4TZ": "Toyota",
+    "JNJ": "Nissan",
+    "KPA": "Ssangyong",
+    "1H7": "Honda USA",
+    "JT0": "Toyota",
+    "1GV": "General Motors USA",
+    "4SM": "Subaru-Isuzu Automotive",
+    "JAH": "Isuzu",
+    "4FA": "Mazda USA",
+    "JTE": "Toyota",
+    "4TU": "Toyota",
+    "2G6": "General Motors Canada",
+    "4MF": "Mercury",
+    "1FC": "Ford Motor Company",
+    "4ST": "Subaru-Isuzu Automotive",
+    "JAA": "Isuzu",
+    "1H4": "Honda USA",
+    "4S7": "Subaru-Isuzu Automotive",
+    "JTD": "Toyota",
+    "JMB": "Mazda",
+    "4SR": "Subaru-Isuzu Automotive",
+    "2GK": "General Motors Canada",
+    "5FB": "Honda USA-Alabama",
+    "5LV": "Lincoln",
+    "2M1": "Mercury",
+    "4SB": "Subaru-Isuzu Automotive",
+    "4MK": "Mercury",
+    "2TR": "Toyota Canada",
+    "LVS": "Ford Chang An",
+    "JN3": "Nissan",
+    "1L8": "Lincoln USA",
+    "4TH": "Toyota",
+    "3GK": "General Motors Mexico",
+    "JKY": "Kawasaki",
+    "1HR": "Honda USA",
+    "3GR": "General Motors Mexico",
+    "JAW": "Isuzu",
+    "4US": "BMW USA",
+    "1HT": "Honda USA",
+    "4TX": "Toyota",
+    "3G4": "General Motors Mexico",
+    "4F7": "Mazda USA",
+    "2G1": "Chevrolet Canada",
+    "JS2": "Suzuki",
+    "3G9": "General Motors Mexico",
+    "3NL": "Nissan Mexico",
+    "JSR": "Suzuki",
+    "1LL": "Lincoln USA",
+    "JA7": "Isuzu",
+    "1HJ": "Honda USA",
+    "KLE": "Daewoo General Motors South Korea",
+    "JKU": "Kawasaki",
+    "4SK": "Subaru-Isuzu Automotive",
+    "JF6": "Fuji Heavy Industries",
+    "3HH": "Honda Mexico",
+    "8AJ": "Toyota Argentina",
+    "LZG": "Shaanxi Automobile Group",
+    "2GC": "General Motors Canada",
+    "5TN": "Toyota USA - trucks",
+    "JS3": "Suzuki",
+    "WDB": "Mercedes-Benz",
+    "3N0": "Nissan Mexico",
+    "W0L": "Opel",
+    "MMM": "Chevrolet Thailand",
+    "5LT": "Lincoln",
+    "1G1": "Chevrolet USA",
+    "4SC": "Subaru-Isuzu Automotive",
+    "JKT": "Kawasaki",
+    "L56": "Renault Samsung",
+    "4T3": "Toyota",
+    "2MT": "Mercury",
+    "LZY": "Yutong Zhengzhou",
+    "JKR": "Kawasaki",
+    "VF1": "Renault",
+    "SCE": "DeLorean Motor Cars N. Ireland (UK)",
+    "JM3": "Mazda",
+    "4T4": "Toyota",
+    "JSH": "Suzuki",
+    "4FU": "Mazda USA",
+    "5T4": "Toyota USA - trucks",
+    "5L8": "Lincoln",
+    "2TL": "Toyota Canada",
+    "JKL": "Kawasaki",
+    "4F2": "Mazda USA",
+    "JSN": "Suzuki",
+    "JF9": "Fuji Heavy Industries",
+    "3HW": "Honda Mexico",
+    "1NF": "Nissan USA",
+    "3FE": "Ford Motor Company Mexico",
+    "UU1": "Renault Dacia",
+    "1M2": "Mack Truck USA",
+    "1NV": "Nissan USA",
+    "6H8": "General Motors-Holden (pre Nov 2002)",
+    "3HG": "Honda Mexico",
+    "JND": "Nissan",
+    "3GT": "General Motors Mexico",
+    "3H3": "Honda Mexico",
+    "JAX": "Isuzu",
+    "JNA": "Nissan",
+    "KL3": "Daewoo General Motors South Korea",
+    "VNE": "Irisbus (France)",
+    "1N5": "Nissan USA",
+    "3GC": "General Motors Mexico",
+    "WF0": "Ford Germany",
+    "3HN": "Honda Mexico",
+    "4SA": "Subaru-Isuzu Automotive",
+    "JN8": "Nissan",
+    "4V4": "Volvo",
+    "2GW": "General Motors Canada",
+    "4FC": "Mazda USA",
+    "AAV": "Volkswagen South Africa",
+    "JT3": "Toyota",
+    "JAS": "Isuzu",
+    "4FY": "Mazda USA",
+    "4TE": "Toyota",
+    "JN2": "Nissan",
+    "3N1": "Nissan Mexico",
+    "1ME": "Mercury USA",
+    "3HV": "Honda Mexico",
+    "KNA": "Kia",
+    "9BF": "Ford Motor Company Brazil",
+    "2TD": "Toyota Canada",
+    "JK6": "Kawasaki",
+    "4SS": "Subaru-Isuzu Automotive",
+    "JAB": "Isuzu",
+    "JNT": "Nissan",
+    "YS3": "Saab",
+    "KLL": "Daewoo General Motors South Korea",
+    "2WL": "Western Star",
+    "1HG": "Honda USA",
+    "3GH": "General Motors Mexico",
+    "8AG": "Chevrolet Argentina",
+    "2MF": "Mercury",
+    "1YV": "Mazda USA (AutoAlliance International)",
+    "2TW": "Toyota Canada",
+    "JNY": "Nissan",
+    "1LM": "Lincoln USA",
+    "5TY": "Toyota USA - trucks",
+    "JSM": "Suzuki",
+    "3NU": "Nissan Mexico",
+    "5TC": "Toyota USA - trucks",
+    "5T1": "Toyota USA - trucks",
+    "4S1": "Subaru-Isuzu Automotive",
+    "1LS": "Lincoln USA",
+    "2FA": "Ford Motor Company Canada",
+    "JM4": "Mazda",
+    "5TD": "Toyota USA - trucks",
+    "5FV": "Honda USA-Alabama",
+    "JAP": "Isuzu",
+    "JTY": "Toyota",
+    "3GY": "General Motors Mexico",
+    "5LD": "Lincoln",
+    "2TJ": "Toyota Canada",
+    "8AD": "Peugeot Argentina",
+    "4SZ": "Subaru-Isuzu Automotive",
+    "JF1": "Fuji Heavy Industries",
+    "JNB": "Nissan",
+    "2GP": "General Motors Canada",
+    "JSB": "Suzuki",
+    "JTB": "Toyota",
+    "TDM": "QUANTYA Swiss Electric Movement (Switzerland)",
+    "4MP": "Mercury",
+    "JAD": "Isuzu",
+    "4T8": "Toyota",
+    "JN5": "Nissan",
+    "5T9": "Toyota USA - trucks",
+    "1GJ": "General Motors USA",
+    "3GU": "General Motors Mexico",
+    "JKC": "Kawasaki",
+    "JK1": "Kawasaki",
+    "4FB": "Mazda USA",
+    "JAU": "Isuzu",
+    "6G1": "General Motors-Holden (post Nov 2002)",
+    "JMD": "Mazda",
+    "3GX": "General Motors Mexico",
+    "VF3": "Peugeot",
+    "ZAM": "Maserati Biturbo",
+    "2GL": "General Motors Canada",
+    "1D3": "Dodge",
+    "1XP": "Peterbilt USA",
+    "3HX": "Honda Mexico",
+    "3GF": "General Motors Mexico",
+    "TRU": "Audi Hungary",
+    "5LS": "Lincoln",
+    "2MM": "Mercury",
+    "JST": "Suzuki",
+    "2MA": "Mercury",
+    "TSM": "Suzuki",
+    "1H1": "Honda USA",
+    "2GN": "General Motors Canada",
+    "3GL": "General Motors Mexico",
+    "1HW": "Honda USA",
+    "4F4": "Mazda USA",
+    "2GH": "General Motors Canada",
+    "3G3": "General Motors Mexico",
+    "4M6": "Mercury",
+    "1N3": "Nissan USA",
+    "JA8": "Isuzu",
+    "JAE": "Isuzu",
+    "NM4": "Tofas Turk",
+    "JFG": "Fuji Heavy Industries",
+    "KNC": "Kia",
+    "3NG": "Nissan Mexico",
+    "1HA": "Honda USA",
+    "1GW": "General Motors USA",
+    "JM9": "Mazda",
+    "3HE": "Honda Mexico",
+    "1NK": "Nissan USA",
+    "1L2": "Lincoln USA",
+    "2M3": "Mercury",
+    "5L5": "Lincoln",
+    "JTA": "Toyota",
+    "4M8": "Mercury",
+    "2C3": "Chrysler Canada",
+    "XL9": "Spyker",
+    "JAR": "Isuzu",
+    "2TT": "Toyota Canada",
+    "1NA": "Nissan USA",
+    "4SN": "Subaru-Isuzu Automotive",
+    "3D3": "Dodge Mexico",
+    "2MN": "Mercury",
+    "4M4": "Mercury",
+    "4TB": "Toyota",
+    "4M1": "Mercury",
+    "JFF": "Fuji Heavy Industries",
+    "2T5": "Toyota Canada",
+    "YS2": "Scania AB",
+    "5T5": "Toyota USA - trucks",
+    "PE3": "Mazda Phillipines",
+    "2WK": "Western Star",
+    "5TR": "Toyota USA - trucks",
+    "JS0": "Suzuki",
+    "JS1": "Suzuki",
+    "JS8": "Suzuki",
+    "5LW": "Lincoln",
+    "JNC": "Nissan",
+    "4F3": "Mazda USA",
+    "1P3": "Plymouth USA",
+    "4MJ": "Mercury",
+    "3FA": "Ford Motor Company Mexico",
+    "1ND": "Nissan USA",
+    "3N4": "Nissan Mexico",
+    "3N3": "Nissan Mexico",
+    "4FK": "Mazda USA",
+    "1R9": "Roadrunner Hay Squeeze USA",
+    "2FZ": "Sterling",
+    "5LX": "Lincoln",
+    "1GM": "Pontiac USA",
+    "1GB": "General Motors USA",
+    "5FW": "Honda USA-Alabama",
+    "2MR": "Mercury",
+    "4FL": "Mazda USA",
+    "1H0": "Honda USA",
+    "4SH": "Subaru-Isuzu Automotive",
+    "3GJ": "General Motors Mexico",
+    "1HE": "Honda USA",
+    "1LA": "Lincoln USA",
+    "2GB": "General Motors Canada",
+    "4FE": "Mazda USA",
+    "4V1": "Volvo",
+    "JKP": "Kawasaki",
+    "1L9": "Lincoln USA",
+    "ZCG": "Cagiva SpA",
+    "2G3": "Oldsmobile Canada",
+    "1N1": "Nissan USA",
+    "JMX": "Mazda",
+    "1G3": "Oldsmobile USA",
+    "1L5": "Lincoln USA",
+    "JN0": "Nissan",
+    "93H": "Honda Brazil",
+    "2T0": "Toyota Canada",
+    "2G4": "Buick Canada",
+    "KLW": "Daewoo General Motors South Korea",
+    "5TV": "Toyota USA - trucks",
+    "2MW": "Mercury",
+    "KLC": "Daewoo General Motors South Korea",
+    "4FP": "Mazda USA",
+    "2T4": "Toyota Canada",
+    "TMP": "Škoda trolleybuses (Czech Republic)",
+    "JS4": "Suzuki",
+    "JK9": "Kawasaki",
+    "JAJ": "Isuzu",
+    "4TG": "Toyota",
+    "3HY": "Honda Mexico",
+    "4T0": "Toyota",
+    "JN7": "Nissan",
+    "JSK": "Suzuki",
+    "JN6": "Nissan",
+    "TK9": "SOR (Czech Republic)",
+    "WEB": "Evobus GmbH (Mercedes-Bus)",
+    "3NY": "Nissan Mexico",
+    "NM0": "Ford Turkey",
+    "4TY": "Toyota",
+    "3NK": "Nissan Mexico",
+    "2MY": "Mercury",
+    "5LJ": "Lincoln",
+    "MPA": "Isuzu Thailand",
+    "JTL": "Toyota",
+    "4TW": "Toyota",
+    "4M0": "Mercury",
+    "4SW": "Subaru-Isuzu Automotive",
+    "3HS": "Honda Mexico",
+    "2TN": "Toyota Canada",
+    "4M2": "Mercury",
+    "4FZ": "Mazda USA",
+    "MRH": "Honda Thailand",
+    "1LF": "Lincoln USA",
+    "2M4": "Mercury",
+    "2GE": "General Motors Canada",
+    "JNU": "Nissan",
+    "1GS": "General Motors USA",
+    "ZAR": "Alfa Romeo",
+    "KL1": "Daewoo General Motors South Korea",
+    "JNE": "Nissan",
+    "2M2": "Mercury",
+    "VSS": "SEAT",
+    "JKV": "Kawasaki",
+    "WAU": "Audi",
+    "4TT": "Toyota",
+    "8AK": "Suzuki Argentina",
+    "1F9": "FWD Corp.",
+    "3H6": "Honda Mexico",
+    "4S0": "Subaru-Isuzu Automotive",
+    "4MV": "Mercury",
+    "JNS": "Nissan",
+    "KLX": "Daewoo General Motors South Korea",
+    "1NZ": "Nissan USA",
+    "5TG": "Toyota USA - trucks",
+    "JMH": "Mazda",
+    "5TF": "Toyota USA - trucks",
+    "5TZ": "Toyota USA - trucks",
+    "SDB": "Peugeot UK",
+    "4SG": "Subaru-Isuzu Automotive",
+    "JSY": "Suzuki",
+    "JA2": "Isuzu",
+    "KLK": "Daewoo General Motors South Korea",
+    "5F2": "Honda USA-Alabama",
+    "VLU": "Scania France",
+    "1LG": "Lincoln USA",
+    "KLZ": "Daewoo General Motors South Korea",
+    "JAF": "Isuzu",
+    "1GZ": "General Motors USA",
+    "4SX": "Subaru-Isuzu Automotive",
+    "5TS": "Toyota USA - trucks",
+    "JK7": "Kawasaki",
+    "JMC": "Mazda",
+    "5TH": "Toyota USA - trucks",
+    "MR0": "Toyota Thailand",
+    "5FE": "Honda USA-Alabama",
+    "KLP": "Daewoo General Motors South Korea",
+    "2T8": "Toyota Canada",
+    "KLV": "Daewoo General Motors South Korea",
+    "4SV": "Subaru-Isuzu Automotive",
+    "1HU": "Honda USA",
+    "93R": "Toyota Brazil",
+    "5LL": "Lincoln",
+    "5TB": "Toyota USA - trucks",
+    "ZHW": "Lamborghini",
+    "3GD": "General Motors Mexico",
+    "JAK": "Isuzu",
+    "JK5": "Kawasaki",
+    "ZDM": "Ducati Motor Holdings SpA",
+    "1LY": "Lincoln USA",
+    "3N9": "Nissan Mexico",
+    "4FM": "Mazda USA",
+    "4MS": "Mercury",
+    "4F8": "Mazda USA",
+    "3GA": "General Motors Mexico",
+    "JNW": "Nissan",
+    "2MJ": "Mercury",
+    "JTR": "Toyota",
+    "JSX": "Suzuki",
+    "KL0": "Daewoo General Motors South Korea",
+    "JFK": "Fuji Heavy Industries",
+    "1LP": "Lincoln USA",
+    "2TM": "Toyota Canada",
+    "3NR": "Nissan Mexico",
+    "JT6": "Toyota",
+    "8AF": "Ford Motor Company Argentina",
+    "1HS": "Honda USA",
+    "5LA": "Lincoln",
+    "3G0": "General Motors Mexico",
+    "5L6": "Lincoln",
+    "3GZ": "General Motors Mexico",
+    "5FJ": "Honda USA-Alabama",
+    "1GF": "General Motors USA",
+    "2MV": "Mercury",
+    "4MX": "Mercury",
+    "5FH": "Honda USA-Alabama",
+    "JFV": "Fuji Heavy Industries",
+    "TM9": "Škoda trolleybuses (Czech Republic)",
+    "2TZ": "Toyota Canada",
+    "4UZ": "Frt-Thomas Bus",
+    "JSF": "Suzuki",
+    "5T8": "Toyota USA - trucks",
+    "1LB": "Lincoln USA",
+    "KLS": "Daewoo General Motors South Korea",
+    "JHL": "Honda",
+    "JTH": "Toyota",
+    "4FX": "Mazda USA",
+    "1GU": "General Motors USA",
+    "4T7": "Toyota",
+    "1H9": "Honda USA",
+    "3HL": "Honda Mexico",
+    "2TU": "Toyota Canada",
+    "JSG": "Suzuki",
+    "JN4": "Nissan",
+    "VV9": "TAUROSpain",
+    "1LH": "Lincoln USA",
+    "1GH": "General Motors USA",
+    "KLM": "Daewoo General Motors South Korea",
+    "5LF": "Lincoln",
+    "1G4": "Buick USA",
+    "2M6": "Mercury",
+    "2TG": "Toyota Canada",
+    "5FZ": "Honda USA-Alabama",
+    "SCA": "Rolls Royce",
+    "3NA": "Nissan Mexico",
+    "JFC": "Fuji Heavy Industries",
+    "4M5": "Mercury",
+    "VF8": "Matra",
+    "2FV": "Freightliner",
+    "VF7": "Citroën",
+    "3NS": "Nissan Mexico",
+    "JNG": "Nissan",
+    "2HK": "Honda Canada",
+    "5TU": "Toyota USA - trucks",
+    "1GT": "GMC Truck USA",
+    "SAL": "Land Rover",
+    "2FT": "Ford Motor Company Canada",
+    "2MZ": "Mercury",
+    "2M5": "Mercury",
+    "JNM": "Nissan",
+    "3GS": "General Motors Mexico",
+    "3NF": "Nissan Mexico",
+    "JSS": "Suzuki",
+    "JKZ": "Kawasaki",
+    "JKH": "Kawasaki",
+    "3H2": "Honda Mexico",
+    "JKG": "Kawasaki",
+    "1VW": "Volkswagen USA",
+    "6FP": "Ford Motor Company Australia",
+    "JA9": "Isuzu",
+    "ZAP": "Piaggio/Vespa/Gilera",
+    "MA7": "Honda Siel Cars India",
+    "4MZ": "Mercury",
+    "SHS": "Honda UK",
+    "8GG": "Chevrolet Chile",
+    "4FG": "Mazda USA",
+    "1NW": "Nissan USA",
+    "1GA": "General Motors USA",
+    "4F6": "Mazda USA",
+    "JM7": "Mazda",
+    "4FJ": "Mazda USA",
+    "WV1": "Volkswagen Commercial Vehicles",
+    "2ME": "Mercury",
+    "4TN": "Toyota",
+    "1L1": "Lincoln USA",
+    "3G7": "General Motors Mexico",
+    "JF4": "Fuji Heavy Industries",
+    "1GY": "General Motors USA",
+    "5FA": "Honda USA-Alabama",
+    "1H2": "Honda USA",
+    "VSX": "Opel Spain",
+    "TMB": "Škoda (Czech Republic)",
+    "6F5": "Kenworth Australia",
+    "JSU": "Suzuki",
+    "2MX": "Mercury",
+    "JMF": "Mazda",
+    "5FN": "Honda USA-Alabama",
+    "1NP": "Nissan USA",
+    "1NB": "Nissan USA",
+    "2GF": "General Motors Canada",
+    "LSY": "Brilliance Zhonghua",
+    "4RK": "Nova Bus USA",
+    "4V2": "Volvo",
+    "ZFA": "Fiat",
+    "3NB": "Nissan Mexico",
+    "JS5": "Suzuki",
+    "JT4": "Toyota",
+    "1LR": "Lincoln USA",
+    "1GK": "General Motors USA",
+    "4VL": "Volvo",
+    "JK0": "Kawasaki",
+    "JSA": "Suzuki",
+    "3HA": "Honda Mexico",
+    "JFE": "Fuji Heavy Industries",
+    "4F0": "Mazda USA",
+    "4SU": "Subaru-Isuzu Automotive",
+    "1GD": "General Motors USA",
+    "JTV": "Toyota",
+    "YV4": "Volvo Cars",
+    "JAM": "Isuzu",
+    "1L6": "Lincoln USA",
+    "JKD": "Kawasaki",
+    "1FB": "Ford Motor Company",
+    "3HU": "Honda Mexico",
+    "3NV": "Nissan Mexico",
+    "JFH": "Fuji Heavy Industries",
+    "KLT": "Daewoo General Motors South Korea",
+    "4SL": "Subaru-Isuzu Automotive",
+    "3ND": "Nissan Mexico",
+    "1HM": "Honda USA",
+    "5FD": "Honda USA-Alabama",
+    "4MD": "Mercury",
+    "4MT": "Mercury",
+    "JTM": "Toyota",
+    "JF7": "Fuji Heavy Industries",
+    "5F3": "Honda USA-Alabama",
+    "2WM": "Western Star",
+    "1LC": "Lincoln USA",
+    "4SJ": "Subaru-Isuzu Automotive",
+    "XMC": "Mitsubishi (NedCar)",
+    "JFN": "Fuji Heavy Industries",
+    "JA0": "Isuzu",
+    "KL6": "Daewoo General Motors South Korea",
+    "KNB": "Kia",
+    "JTJ": "Toyota",
+    "JKS": "Kawasaki",
+    "2G2": "Pontiac Canada",
+    "KNM": "Renault Samsung",
+    "2MB": "Mercury",
+    "5LP": "Lincoln",
+    "JSD": "Suzuki",
+    "KL5": "Daewoo General Motors South Korea",
+    "JSJ": "Suzuki",
+    "5T7": "Toyota USA - trucks",
+    "JTF": "Toyota",
+    "6G2": "Pontiac Australia (GTO & G8)",
+    "1M9": "Mynatt Truck & Equipment",
+    "MAL": "Hyundai",
+    "9BM": "Mercedes-Benz Brazil",
+    "JT9": "Toyota",
+    "KL7": "Daewoo General Motors South Korea",
+    "WBS": "BMW M",
+    "JTN": "Toyota",
+    "ZLA": "Lancia",
+    "2GS": "General Motors Canada",
+    "1N8": "Nissan USA",
+    "1G9": "General Motors USA",
+    "JTS": "Toyota",
+    "5FT": "Honda USA-Alabama",
+    "MM8": "Mazda Thailand",
+    "3HB": "Honda Mexico",
+    "1LV": "Lincoln USA",
+    "1N9": "Nissan USA",
+    "YS4": "Scania Bus",
+    "JNL": "Nissan",
+    "1LJ": "Lincoln USA",
+    "1HX": "Honda USA",
+    "4MR": "Mercury",
+    "4TR": "Toyota",
+    "3NC": "Nissan Mexico",
+    "JTX": "Toyota",
+    "2FM": "Ford Motor Company Canada",
+    "3GM": "General Motors Mexico",
+    "JFT": "Fuji Heavy Industries",
+    "SAJ": "Jaguar",
+    "3N2": "Nissan Mexico",
+    "KLR": "Daewoo General Motors South Korea",
+    "4MC": "Mercury",
+    "1G7": "General Motors USA",
+    "1N4": "Nissan USA",
+    "1HL": "Honda USA",
+    "JT5": "Toyota",
+    "2HG": "Honda Canada",
+    "JNN": "Nissan",
+    "2P3": "Plymouth Canada",
+    "4SY": "Subaru-Isuzu Automotive",
+    "5TT": "Toyota USA - trucks",
+    "1NL": "Nissan USA",
+    "1HD": "Harley-Davidson",
+    "JFZ": "Fuji Heavy Industries",
+    "JNF": "Nissan",
+    "1FV": "Freightliner",
+    "VS6": "Ford Spain",
+    "JAZ": "Isuzu",
+    "LKL": "Suzhou King Long",
+    "JKF": "Kawasaki",
+    "JKE": "Kawasaki",
+    "2G8": "General Motors Canada",
+    "5TW": "Toyota USA - trucks",
+    "4MU": "Mercury",
+    "2GV": "General Motors Canada",
+    "1HN": "Honda USA",
+    "JS7": "Suzuki",
+    "5FK": "Honda USA-Alabama",
+    "5F1": "Honda USA-Alabama",
+    "JS9": "Suzuki",
+    "ZDF": "Ferrari Dino",
+    "JNV": "Nissan",
+    "4T1": "Toyota",
+    "TN9": "Karosa (Czech Republic)",
+    "SCC": "Lotus Cars",
+    "1L3": "Lincoln USA",
+    "3HF": "Honda Mexico",
+    "1HZ": "Honda USA",
+    "2T2": "Toyota Canada",
+    "1HP": "Honda USA",
+    "1C6": "Chrysler",
+    "KLU": "Daewoo General Motors South Korea",
+    "5NP": "Hyundai USA",
+    "PE1": "Ford Phillipines",
+    "2TA": "Toyota Canada",
+    "3G6": "General Motors Mexico",
+    "4TP": "Toyota",
+    "5L0": "Lincoln",
+    "3HK": "Honda Mexico",
+    "3HT": "Honda Mexico",
+    "4FN": "Mazda USA",
+    "1N7": "Nissan USA",
+    "JAC": "Isuzu",
+    "3GP": "General Motors Mexico",
+    "JT8": "Toyota",
+    "4TJ": "Toyota",
+    "2T7": "Toyota Canada",
+    "KL8": "Daewoo General Motors South Korea",
+    "JTZ": "Toyota",
+    "4T6": "Toyota",
+    "2ML": "Mercury",
+    "5N1": "Nissan USA",
+    "JF0": "Fuji Heavy Industries",
+    "1L0": "Lincoln USA",
+    "4M9": "Mercury",
+    "3H9": "Honda Mexico",
+    "JTT": "Toyota",
+    "4FW": "Mazda USA",
+    "NMT": "Toyota Turkiye",
+    "JFJ": "Fuji Heavy Industries",
+    "4F1": "Mazda USA",
+    "5TA": "Toyota USA - trucks",
+    "JKX": "Kawasaki",
+    "4FV": "Mazda USA",
+    "YV3": "Volvo Buses",
+    "5FG": "Honda USA-Alabama",
+    "JKN": "Kawasaki",
+    "5F4": "Honda USA-Alabama",
+    "4S6": "Subaru-Isuzu Automotive",
+    "MNT": "Nissan Thailand",
+    "1HY": "Honda USA",
+    "JT1": "Toyota",
+    "3N8": "Nissan Mexico",
+    "2T3": "Toyota Canada",
+    "YV1": "Volvo Cars",
+    "1LN": "Lincoln USA",
+    "JFX": "Fuji Heavy Industries",
+    "JSZ": "Suzuki",
+    "1LE": "Lincoln USA",
+    "5FF": "Honda USA-Alabama",
+    "1GL": "General Motors USA",
+    "JK2": "Kawasaki",
+    "4S4": "Subaru-Isuzu Automotive",
+    "SCF": "Aston",
+    "9BS": "Scania Brazil",
+    "8A1": "Renault Argentina",
+    "5LM": "Lincoln",
+    "2TE": "Toyota Canada",
+    "JTG": "Toyota",
+    "1GC": "Chevrolet Truck USA",
+    "YV2": "Volvo Trucks",
+    "JK8": "Kawasaki",
+    "1LU": "Lincoln USA",
+    "JK3": "Kawasaki",
+    "5TX": "Toyota USA - trucks",
+    "3G8": "General Motors Mexico",
+    "JS6": "Suzuki",
+    "JA6": "Isuzu",
+    "3GV": "General Motors Mexico",
+    "5LE": "Lincoln",
+    "1GR": "General Motors USA",
+    "1N0": "Nissan USA",
+    "1H6": "Honda USA",
+    "4S9": "Subaru-Isuzu Automotive",
+    "5L7": "Lincoln",
+    "5T0": "Toyota USA - trucks",
+    "8GD": "Peugeot Chile",
+    "1NX": "NUMMI USA",
+    "4T2": "Toyota",
+    "2CN": "CAMI",
+    "4ME": "Mercury",
+    "LZM": "MAN China",
+    "5L3": "Lincoln",
+    "2FB": "Ford Motor Company Canada",
+    "1GN": "General Motors USA",
+    "3HJ": "Honda Mexico",
+    "2TV": "Toyota Canada",
+    "KLF": "Daewoo General Motors South Korea",
+    "1G0": "General Motors USA",
+    "2MS": "Mercury",
+    "4MG": "Mercury",
+    "2D3": "Dodge Canada",
+    "3H1": "Honda Mexico",
+    "JSE": "Suzuki",
+    "5TE": "Toyota USA - trucks",
+    "1LD": "Lincoln USA",
+    "MA3": "Suzuki India",
+    "JA5": "Isuzu",
+    "5LY": "Lincoln",
+    "93U": "Audi Brazil",
+    "4S2": "Subaru-Isuzu Automotive",
+    "4FD": "Mazda USA",
+    "4S8": "Subaru-Isuzu Automotive",
+    "JFU": "Fuji Heavy Industries",
+    "2GR": "General Motors Canada",
+    "YK1": "Saab",
+    "4SP": "Subaru-Isuzu Automotive",
+    "2GJ": "General Motors Canada",
+    "3N5": "Nissan Mexico",
+    "TRA": "Ikarus Bus",
+    "SJN": "Nissan UK",
+    "5FS": "Honda USA-Alabama",
+    "JSL": "Suzuki",
+    "KMH": "Hyundai",
+    "2M8": "Mercury",
+    "JFD": "Fuji Heavy Industries",
+    "JML": "Mazda",
+    "2TB": "Toyota Canada",
+    "4M7": "Mercury",
+    "9BG": "Chevrolet Brazil",
+    "1NY": "Nissan USA",
+    "JAY": "Isuzu",
+    "1HH": "Honda USA",
+    "5LK": "Lincoln",
+    "JMN": "Mazda",
+    "3H4": "Honda Mexico",
+    "5L4": "Lincoln",
+    "3NH": "Nissan Mexico",
+    "1J4": "Jeep",
+    "5LN": "Lincoln",
+    "AFA": "Ford South Africa",
+    "JTC": "Toyota",
+    "2GT": "General Motors Canada",
+    "9FB": "Renault Colombia",
+    "3H5": "Honda Mexico",
+    "5LG": "Lincoln",
+    "MP1": "Isuzu Thailand",
+    "1FT": "Ford Motor Company",
+    "JKK": "Kawasaki",
+    "TMK": "Karosa (Czech Republic)",
+    "1NN": "Nissan USA",
+    "2TY": "Toyota Canada",
+    "4SE": "Subaru-Isuzu Automotive",
+    "5LB": "Lincoln",
+    "3HC": "Honda Mexico",
+    "3H7": "Honda Mexico",
+    "5TM": "Toyota USA - trucks",
+    "1C3": "Chrysler",
+    "4S3": "Subaru-Isuzu Automotive",
+    "2V4": "Volkswagen Canada",
+    "6MM": "Mitsubishi Motors Australia",
+    "1NC": "Nissan USA",
+    "WMA": "MAN Germany",
+    "4TA": "Toyota",
+    "5F9": "Honda USA-Alabama",
+    "5TJ": "Toyota USA - trucks",
+    "5FP": "Honda USA-Alabama",
+    "JNH": "Nissan",
+    "4SF": "Subaru-Isuzu Automotive",
+    "4FS": "Mazda USA",
+    "5F7": "Honda USA-Alabama",
+    "SAR": "Rover",
+    "SFD": "Alexander Dennis UK",
+    "VSK": "Nissan Spain",
+    "VX1": "Zastava / Yugo Serbia",
+    "1HF": "Honda USA",
+    "1LT": "Lincoln USA",
+    "1H3": "Honda USA",
+    "4VZ": "Volvo",
+    "JNK": "Nissan",
+    "JM0": "Mazda",
+    "3NX": "Nissan Mexico",
+    "2M9": "Mercury",
+    "2MK": "Mercury",
+    "2MD": "Mercury",
+    "6F4": "Nissan Motor Company Australia",
+    "1M1": "Mack Truck USA",
+    "2MU": "Mercury",
+    "5LU": "Lincoln",
+    "8AW": "Volkswagen Argentina",
+    "KLB": "Daewoo General Motors South Korea",
+    "4V3": "Volvo",
+    "2TX": "Toyota Canada",
+    "JF3": "Fuji Heavy Industries",
+    "4VM": "Volvo",
+    "2MP": "Mercury",
+    "JFP": "Fuji Heavy Industries",
+    "3GB": "General Motors Mexico",
+    "5L1": "Lincoln",
+    "2M0": "Mercury",
+    "MNB": "Ford Thailand",
+    "JAN": "Isuzu",
+    "MMB": "Mitsubishi Thailand",
+    "2GA": "General Motors Canada",
+    "PL1": "Proton",
+    "4MM": "Mercury",
+    "SU9": "Solaris Bus & Coach (Poland)",
+    "5T6": "Toyota USA - trucks",
+    "2MG": "Mercury",
+    "JKA": "Kawasaki",
+    "L5Y": "Merato Motorcycle Taizhou Zhongneng",
+    "3HP": "Honda Mexico",
+    "2GM": "General Motors Canada",
+    "4SD": "Subaru-Isuzu Automotive",
+    "JFS": "Fuji Heavy Industries",
+    "KLY": "Daewoo General Motors South Korea",
+    "4MB": "Mercury",
+    "1GE": "General Motors USA",
+    "JNP": "Nissan",
+    "KLJ": "Daewoo General Motors South Korea",
+    "JMR": "Mazda",
+    "JHG": "Honda",
+    "4MW": "Mercury",
+    "5FR": "Honda USA-Alabama",
+    "JKW": "Kawasaki",
+    "1H5": "Honda USA",
+    "5T3": "Toyota USA - trucks",
+    "MC2": "Volvo Eicher commercial vehicles limited.",
+    "KLG": "Daewoo General Motors South Korea",
+    "4FF": "Mazda USA",
+    "LGH": "Dong Feng (DFM)",
+    "JA1": "Isuzu",
+    "JTK": "Toyota",
+    "4MA": "Mercury",
+    "4S5": "Subaru-Isuzu Automotive",
+    "JMY": "Mazda",
+    "5FY": "Honda USA-Alabama",
+    "2G9": "General Motors Canada",
+    "3G1": "General Motors Mexico",
+    "KL2": "Daewoo General Motors South Korea",
+    "5F0": "Honda USA-Alabama",
+    "3HR": "Honda Mexico",
+    "LVV": "Chery",
+    "KPT": "Ssangyong",
+    "1L4": "Lincoln USA",
+    "5FC": "Honda USA-Alabama",
+    "KLN": "Daewoo General Motors South Korea",
+    "5F6": "Honda USA-Alabama",
+    "1NR": "Nissan USA",
+    "5L2": "Lincoln",
+    "5T2": "Toyota USA - trucks",
+    "1FU": "Freightliner",
+    "WAG": "Neoplan",
+    "4FH": "Mazda USA",
+    "JFA": "Fuji Heavy Industries",
+    "1H8": "Honda USA",
+    "3G5": "General Motors Mexico",
+    "TSE": "Ikarus Egyedi Autobuszgyar",
+    "2HM": "Hyundai Canada",
+    "2T9": "Toyota Canada",
+    "4TC": "Toyota",
+    "4MY": "Mercury",
+    "9BW": "Volkswagen Brazil",
+    "1NU": "Nissan USA",
+    "2NV": "Nova Bus Canada",
+    "5LC": "Lincoln",
+    "3VW": "Volkswagen Mexico",
+    "6U9": "Privately Imported car in Australia",
+    "ZD4": "Aprilia",
+    "LDY": "Zhongtong Coach",
+    "KLD": "Daewoo General Motors South Korea",
+    "JT2": "Toyota",
+    "JTW": "Toyota",
+    "JAG": "Isuzu",
+    "KL4": "Daewoo General Motors South Korea",
+    "JA4": "Isuzu",
+    "4FR": "Mazda USA",
+    "4T9": "Toyota",
+    "4V6": "Volvo",
+    "LZE": "Isuzu Guangzhou",
+    "3NP": "Nissan Mexico",
+    "JMA": "Mazda",
+    "2G0": "General Motors Canada",
+    "8AP": "Fiat Argentina",
+    "1G8": "Saturn USA",
+    "VSE": "Suzuki Spain (Santana Motors)",
+    "JMZ": "Mazda",
+    "4V5": "Volvo",
+    "5LZ": "Lincoln",
+    "JFR": "Fuji Heavy Industries",
+    "JM2": "Mazda",
+    "5TL": "Toyota USA - trucks",
+    "JN9": "Nissan",
+    "2G5": "General Motors Canada",
+    "3H0": "Honda Mexico",
+    "93Y": "Renault Brazil",
+    "JF8": "Fuji Heavy Industries",
+    "JKJ": "Kawasaki",
+    "JSP": "Suzuki",
+    "2TF": "Toyota Canada",
+    "WDC": "DaimlerChrysler",
+    "WDD": "McLaren",
+    "3HM": "Honda Mexico",
+    "WMW": "MINI",
+    "3NW": "Nissan Mexico",
+    "2T6": "Toyota Canada",
+    "MHR": "Honda Indonesia",
+    "1L7": "Lincoln USA",
+    "3N7": "Nissan Mexico",
+    "JFM": "Fuji Heavy Industries",
+    "JMJ": "Mazda",
+    "JM8": "Mazda",
+    "2TP": "Toyota Canada",
+    "1GG": "General Motors USA",
+    "JFY": "Fuji Heavy Industries",
+    "JFB": "Fuji Heavy Industries",
+    "3NE": "Nissan Mexico",
+    "6T1": "Toyota Motor Corporation Australia",
+    "NLE": "Mercedes-Benz Turk Truck",
+    "1NG": "Nissan USA",
+    "1NE": "Nissan USA",
+    "5TK": "Toyota USA - trucks",
+    "2TS": "Toyota Canada",
+    "4F9": "Mazda USA",
+    "4MN": "Mercury",
+    "WVW": "Volkswagen",
+    "JTP": "Toyota",
+    "4MH": "Mercury",
+    "KM8": "Hyundai",
+    "JTU": "Toyota",
+    "4TF": "Toyota",
+    "JMS": "Mazda",
+    "3NN": "Nissan Mexico",
+    "2TC": "Toyota Canada",
+    "4TV": "Toyota",
+    "2T1": "Toyota Canada",
+    "2GX": "General Motors Canada",
+    "JK4": "Kawasaki",
+    "JMU": "Mazda",
+    "JF5": "Fuji Heavy Industries",
+    "WP0": "Porsche",
+    "JNX": "Nissan",
+    "1G5": "General Motors USA",
+    "JNR": "Nissan",
+    "JF2": "Fuji Heavy Industries",
+    "JKB": "Kawasaki",
+    "JME": "Mazda",
+    "JA3": "Isuzu",
+    "1G2": "Pontiac USA",
+    "VWV": "Volkswagen Spain",
+    "2GU": "General Motors Canada",
+    "4TK": "Toyota",
+    "1HV": "Honda USA",
+    "VS9": "Carrocerias Ayats (Spain)",
+    "1FD": "Ford Motor Company",
+    "JMP": "Mazda",
+    "KLH": "Daewoo General Motors South Korea",
+    "4TD": "Toyota",
+    "2MH": "Mercury",
+    "2FC": "Ford Motor Company Canada",
+    "1G6": "Cadillac USA",
+    "9BD": "Fiat Brazil",
+    "3HZ": "Honda Mexico",
+    "JAV": "Isuzu",
+    "2G7": "General Motors Canada",
+    "WBA": "BMW",
+    "JT7": "Toyota",
+    "JKM": "Kawasaki",
+    "3N6": "Nissan Mexico",
+    "1LX": "Lincoln USA",
+    "JMK": "Mazda",
+    "3NT": "Nissan Mexico",
+    "5F8": "Honda USA-Alabama",
+    "KLA": "Daewoo General Motors South Korea",
+    "2GG": "General Motors Canada",
+    "3GW": "General Motors Mexico",
+    "4F5": "Mazda USA",
+    "1M3": "Mack Truck USA",
+    "1LW": "Lincoln USA",
+    "4M3": "Mercury",
+    "3GN": "General Motors Mexico",
+    "1NS": "Nissan USA",
+    "1NH": "Nissan USA",
+    "1XK": "Kenworth USA",
+    "2TH": "Toyota Canada",
+    "1HC": "Honda USA",
+    "1NJ": "Nissan USA",
+    "JFW": "Fuji Heavy Industries",
+    "JSW": "Suzuki",
+    "ZFF": "Ferrari",
+    "LTV": "Toyota Tian Jin",
+    "3G2": "General Motors Mexico",
+    "4FT": "Mazda USA",
+    "3H8": "Honda Mexico",
+    "3GG": "General Motors Mexico",
+    "3HD": "Honda Mexico",
+    "4TS": "Toyota",
+    "2FU": "Freightliner",
+    "1FM": "Ford Motor Company",
+    "1LK": "Lincoln USA",
+    "JMW": "Mazda",
+    "2GY": "General Motors Canada",
+    "4TM": "Toyota",
+    "5LR": "Lincoln",
+    "ZOM": "OM",
+    "3NJ": "Nissan Mexico",
+    "MMT": "Mitsubishi Thailand",
+    "1M4": "Mack Truck USA",
+    "1HB": "Honda USA",
+    "3NZ": "Nissan Mexico",
+    "JN1": "Nissan",
+    "5FU": "Honda USA-Alabama",
+
+    // xUSSR manufacturer
+    // list source: https://uk.wikipedia.org/wiki/Ідентифікаційний_номер_транспортного_засобу
+
+    // Russia
+    "XSE": 'IMZ-Ural Ltd. "Russian motorcycles", Russia',
+    "XTA": 'Lada/AutoVaz, Togliatti, Russia',
+    "XTB": 'JSC "Moskvich" - the Moscow Automobile Plant, Russia',
+    "XTC": 'Open Joint Stock Company "KAMAZ" (Kama Automobile Plant), Russia',
+    "XTF": 'JSC "Golitsyn Bus Plant" (HolAZ), Russia',
+    "XTH": 'GAS, "Gorky Automobile Plant", Russia',
+    "XTJ": 'JSC "Serpukhov Automobile Plant" ( "SeAZ"), Russia',
+    "XTK": 'Izhevsk Automobile Plant ("IzhAvto"), Russia',
+    "XTP": 'JSC "Metrovagonmash" (until 1992 - "Mytyschenskyy engineering plant" or MMP), Russia',
+    "XTT": 'JSC "UAZ", Russia',
+    "XTU": 'JSC "trolza" (fully Closed Joint Stock Company "trolza"), Russia',
+    "XTY": 'LiAZ, Russia',
+    "XTZ": 'Car Plant. IA Likhachev, Russia',
+    "XUS": 'Nyzhehorodets, Russia',
+    "XVD": 'SemAR, Russia',
+    "XVG": 'Company "Michurinsk bus" (Michurinsk avtoremontnыy plant Marz), Russia',
+    "XWF": 'Avtotor - a company producing cars in Kaliningrad, Russia',
+    "XWK": 'Izhevsk Automobile Plant ("IzhAvto"), Russia',
+    "XWN": 'Armor Group, Russia',
+    "X06": 'DYSA Auto, Russia',
+    "X08": 'Myhnevskyy RMZ, Russia',
+    "X0C": 'TagAZ, Taganrog, Russia',
+    "X0J": 'Company "Mercator Servis ST", Russia',
+    "X0P": 'Company "Perspective-K", Kazan, Russia',
+    "X0T": 'MZ "TONAR" Orekhovo-Zuevo, Russia',
+    "X0Y": 'Rodnikovskoe Machine Works, Russia',
+    "X1A": 'HZSA, Nizhny Novgorod, Russia',
+    "X1F": 'NEFAZ, Neftekamsk, Russia',
+    "X1J": 'KZAP, Krasnoyarsk, Russia',
+    "X1L": 'TMZ, Tavda, Russia',
+    "X1M": 'PAZ, Pavlovo, Russia',
+    "X1P": 'UralAZ, Miass, Russia',
+    "X1E": 'KAvZ, Kurgan, Russia',
+
+    // Ukraine
+    "XSG": 'Odessa car assembly plant ODAZ, Ukraine',
+    "XSL": 'Lvov factory motorcycles, Ukraine',
+    "XSP": 'Kyiv Motorcycle Plant, Ukraine',
+    "XSW": 'JOINT "5 Kiev car repair PLANT", Ukraine',
+    "XTD": 'Lutsk Automobile Plant, JSC, Ukraine',
+    "XTE": 'PJSC Zaporizhia Automobile Plant (JSC "ZAZ"), Ukraine',
+    "XTG": 'Ltd. "Kherson car assembly plant" Anto-Rus "(Antorus), Ukraine',
+    "XTV": 'Lugansk Car Assembly Plant, Ukraine',
+    "XTW": 'Lviv Bus Plant (LAZ), Ukraine',
+    "XTX": 'Odessa car assembly plant ODAZ, Ukraine',
+    "X1C": 'Kremenchug Automobile Plant, Ukraine',
+
+    // Belarus
+    "XTM": 'Minsk Automobile Plant (MAZ), Minsk, Belarus',
+    "X1R": 'BelAZ, Zhodino, Belarus',
+
+    // Uzbekistan
+    "XWB": 'UZ-Daewoo Auto, Asaka, Uzbekistan',
+
+    // Kazakhstan
+    "XWW": 'Asia-Auto, Ust-Kamenogorsk, Kazakhstan',
+
+    // Latvia
+    "X1D":'RAF, Riga, Latvia',
+
+    // Unsorted (Need to translate from Ukrainian)
+    "X1S": 'Zid, Kovrov, Russia',
+    "X1V": 'Kuban, Krasnodar, Russia',
+    "X1W": 'SZAP, Stavropol, Russia',
+    "X1X": 'Kupava, Minsk, Belarus',
+    "X3W": '"Betsema", Krasnogorsk, Russia',
+    "X3Z": 'Resurrection plant "Mashynostroytel", Voskresensk, Russia',
+    "X4K": 'VAP "Volzhanin", Volzhsky, Russia',
+    "X52": 'Company "Transles", Khimki, Russia',
+    "X5C": 'LLC "Trailer", Stupino, Russia',
+    "X5F": 'OJSC "Hydraulic lifter vehicles», St. Petersburg, Russia',
+    "X5T": 'OJSC "41 central plant zheleznodorozhnoy technics", Tomilino, Russia',
+    "X6F": 'Company "Spector Motors", v. Bratovschyna (Moscow region), Russia',
+    "X7D": 'RosLada, Syzran, Russia',
+    "X7M": 'TagAZ, Taganrog (Rostov region), Russia',
+    "X7T": 'CHAZ, Chernihiv, Ukraine',
+    "X8U": 'Scania-Peter, Saint-Petersburg, Russia',
+    "X9L": 'GM-AVTOVAZ, Togliatti (Samara Region), Russia',
+    "X9N": 'Company "Samotlor-NN", Nizhny Novgorod, Russia',
+    "X9U": 'LLC "Almanac", Nizhny Novgorod, Russia',
+    "X9X": 'LLC "Autotrade-12", s. Novoharytonovo (Moscow region), Russia',
+    "Y3B": 'BelAZ, Zhodino, Belarus',
+    "Y3C": 'MoAZ, Mogilev, Belarus',
+    "Y3J": 'BKM, Minsk, Belarus',
+    "Y3M": 'MAZ, Minsk, Belarus',
+    "Y4F": 'Ford Union Minsk, Abchak (Belarus)',
+    "Y6A": 'AutoKrAZ, Ukraine, Kremenchug',
+    "Y6D": 'ZAZ, Zaporozhe, Ukraine',
+    "Y6J": 'Repair plant Cherkasy, Cherkasy, Ukraine',
+    "Y6L": 'LuAZ, Lutsk, Ukraine',
+    "Y6R": 'Kherson car assembly factory «Anto-Rus", Kherson, Ukraine',
+    "Y6V": 'FDI Kitpred, Kyiv, Ukraine',
+    "Y69": 'Bohdan SpecAutomotive, Cherkasy, Ukraine /  Budmash, Kyiv, Ukraine / TITAL, Kyiv, Ukraine',
+    "Y7A": 'AutoKrAZ, Ukraine, Kremenchug',
+    "Y7B": 'Cherkasy Bus, Ukraine, Cherkasy ',
+    "Y7C": 'Kremenchuk Car Assembly Plant, Kremenchuk, Ukraine',
+    "Y7F": 'BAZ, Boryspil, Ukraine',
+    "Y7K": 'CMH, Kyiv, Ukraine',
+    "Y79": 'HalAZ, Lviv, Ukraine',
+    "Y8A": 'Lviv Bus Plant (LAZ), Ukraine',
+    "Y89": 'Yuzhmash,Dnipropetrovsk, Ukraine',
+    "Z7C": '"Louis", Nizhny Novgorod, Russia',
+    "Z7G": 'LLC "Sollers-Yelabuga», Yelabuga, Russia',
+    "Z7T": 'RoAZ, Rostov-on-Don, Russia',
+    "Z7Y": '"Artan", Nizhny Novgorod, Russia',
+    "Z9Z": 'OOO "United Auto Group", Izhevsk, Russia',
+    "X89": 'Little xUSSR factories',
+    "Y39": 'Little xUSSR factories',
+
+    // Additional records from source https://uk.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B0%D0%B2%D1%82%D0%BE%D0%B2%D0%B8%D1%80%D0%BE%D0%B1%D0%BD%D0%B8%D0%BA%D1%96%D0%B2
+
+    "102": 'Crown Coach International, USA',
+    "103": 'Crown Coach International, USA',
+    "10R": 'E-Z-GO Division of Textron Inc, USA',
+    "10T": 'Oshkosh Truck Corporation, USA',
+    "111": 'Commuter Vehicles Inc, USA',
+    "1CV": 'Commuter Vehicles Inc, USA',
+    "137": 'AM General LLC, USA',
+    "5GR": 'AM General LLC, USA',
+    "13M": 'Man Truck And Bus Corporation, USA',
+    "145": 'Hyundai Steel Industries Inc, USA',
+    "163": 'Volvo Road Machinery, USA',
+    "19U": 'American Honda Motor Co Inc, USA',
+    "19V": 'Honda Manufacturing of Indiana LLC, USA',
+    "19X": 'Honda Manufacturing of Indiana LLC, USA',
+    "1A9": 'American Ironhorse Motorcycle Company, USA',
+    "383": 'American Ironhorse Motorcycle Company, USA',
+    //"5L5": 'American Ironhorse Motorcycle Company, USA',
+    "841": 'AC Propulsion Inc, USA',
+    "1AF": 'American LaFrance, USA',
+    "4Z3": 'American LaFrance, USA',
+    "5SX": 'American LaFrance, USA',
+    "1AH": 'AMC, USA',
+    "1AM": 'AMC, USA',
+    "1AT": 'AMC, USA',
+    "1CY": 'Crane Carrier Company, USA',
+    "1F8": 'American Transportation Corporation, USA',
+    //"1F9": 'American Transportation Corporation	',
+    "1F9": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+    "": '',
+};
+
+addRange(manufacturers, '1A', '2','8','Chrysler Group LLC, USA');
+addRange(manufacturers, '1A', 'C','E','American Motors (AMC), USA');
+addRange(manufacturers, '1B', '2','8','Chrysler Group LLC, USA');
+addRange(manufacturers, '1B', 'A','G','Blue Bird Body Company, USA');
+addRange(manufacturers, '1C', '2','8','Chrysler Group LLC, USA');
+addRange(manufacturers, '1D', '2','8','Chrysler Group LLC, USA');
+addRange(manufacturers, '1E', '2','8','Chrysler Group LLC, USA');
+addRange(manufacturers, '1F', '0','5','Ford Motor Company, USA');
+
+module.exports = manufacturers;
+
+/*
+1F8	American Transportation Corporation	Конуей, штат Арканзас	США
+1F9/081	Force Motor Homes (авто-дачі)	Корал-Спрінгс, штат Флорида	США
+1F9/251	Force Chopper Design Inc (мото)	Джолієт, штат Іллінойс	США
+1F9/338, 5ZS	Force Protection Industries Inc (прич.)	Ладсон штат Південна Кароліна	США
+1FA — 1FD	Ford Motor Company	Дірборн, штат Мічиган	США
+1FE	Ferree Trailer Corporation (прич.)	Клімакс, штат Північна Кароліна	США
+1FF	Ford Motor Company (глайдери)	Дірборн, штат Мічиган	США
+1FJ	Ford Motor Company (електр.)	Дірборн, штат Мічиган	США
+1FL	Ford Motor Company (низькошвидкісні)	Дірборн, штат Мічиган	США
+1FM, 1FR, 1FT	Ford Motor Company	Дірборн, штат Мічиган	США
+1FU, 1FV	Daimler Trucks North America LLC	Портленд, штат Орегон	США
+1G0	General Motors (Opel USA)	Детройт, штат Мічиган	США
+1G1 — 1G8	General Motors	Детройт, штат Мічиган	США
+1G4	Buick (відділ.General Motors)	Детройт, штат Мічиган	США
+1G6	Cadillac (відділ.General Motors)	Детройт, штат Мічиган	США
+1GA, 1GB	General Motors	Детройт, штат Мічиган	США
+1GC	Chevrolet	Детройт, штат Мічиган	США
+1GD — 1GF	General Motors	Детройт, штат Мічиган	США
+1GG	General Motors (вант.)	Детройт, штат Мічиган	США
+1GH	Oldsmobile (відділ.General Motors)	Детройт, штат Мічиган	США
+1GJ — 1GL	General Motors	Детройт, штат Мічиган	США
+1GM	Pontiac (відділ.General Motors)	Детройт, штат Мічиган	США
+1GN — 1GT	General Motors	Детройт, штат Мічиган	США
+1GY	Cadillac (відділ.General Motors)	Детройт, штат Мічиган	США
+1HD, 5HD	Harley-Davidson (мото)	Мілуокі, штат Вісконсин	США;
+1HF	American Honda Motor Company (мото)	Торренс; Ґардена, штат Каліфорнія	США
+1HG	Honda of America Mfg Inc	Торренс, штат Каліфорнія, Моррисвіль штат Огайо	США
+1J3 — 1J8	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1JC, 1JM	Jeep (Chrysler Group LLC)	Толедо, штат Огайо; Саузфілд, штат Мічиган	США
+1JD — 1JH	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1JT	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1L1, 1LJ, 1LN	Lincoln (Ford Motor Company)	Дірборн, штат Мічиган	США
+1LK	Lektrike (електр.)	Ескондідо, штат Каліфорнія	США
+1LV	Lectramotors (електр.)	Лас-Вегас, штат Невада	США
+1M1 — 1M4	Mack Trucks, Inc. (Volvo Powertrain)	Ґрінсборо, штат Північна Кароліна	США
+1M9/190	Isuzu Motors America LLC (автоб.)	Саутфілд, штат Мічиган	США
+1MB	Mercedes-Benz Of North America	Монтвеіл, штат Нью-Джерсі	США
+1ME, 1MJ	Mercury (Ford Motor Company)	Дірборн, штат Мічиган	США
+1MH, 1MR	Ford Motor Company	Дірборн, штат Мічиган	США
+1N4, 1N6	Nissan Motor Mfg Corp USA	Смирна, Нашвілл, штат Теннессі	США
+1NJ	Ford Motor Company	Дірборн, штат Мічиган	США
+1NX	New United Motor Manufacturing Inc	Фремонт, штат Каліфорнія	США
+1P2 — 1P8	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1PG, 1PJ	Nissan Motor Mfg Corp USA	Смирна, Нашвілл, штат Теннессі	США
+1UC — 1UE	AM General LLC (військ.техн.)	Детройт, штат Мічиган	США
+1UH, 1UM, 1UT	AM General LLC (військ.техн.)	Детройт, штат Мічиган	США
+1V1 — 1V3	Volkswagen Group of America, Inc.	Оберн-Гіллс, штат Мічиган; Херндон, штат Вірджинія	США
+1VH	Chrysler Group LLC (автоб.)	Оберн-Гіллс, штат Мічиган	США
+1VW	Volkswagen Group of America, Inc.	Херндон, штат Вірджинія	США
+1XE — 1XM	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1YV — 1YY	Auto Alliance International Inc (Mazda)	Флет Рок, штат Мічиган	США
+1YZ	Mazda North American Operations	Ервайн, штат Каліфорнія	США
+1Z2 — 1Z8	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+1Z9/332	Oshkosh Specialty Vehicles LLC (сп. техн.)	Аплтон, штат Вісконсин	США
+1ZV — 1ZZ	Auto Alliance International Inc (Mazda)	Флет Рок, штат Мічиган	США
+2A2 — 2A8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2B1	Orion International	Міссісога, (Онтаріо)	Канада
+2B2 — 2B8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2BC — 2BH	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+2BM, 2BT	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+2C0-2C5	CAMI Automotive	Інгерсолл (Онтаріо),	Канада
+2C3 — 2C8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2C8, 2S4	CAMI Automotive	Вітбі (Онтаріо)	Канада
+2CD — 2CF	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+2CG	CAMI Automotive	Ошава (Онтаріо)	Канада
+2CH, 2CM	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+2CK-2CT	CAMI Automotive	Інгерсолл (Онтаріо),	Канада
+2D2 — 2D8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2E2 — 2E8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2F	Ford Motor Company of Canada Limited	Оквілл (Онтаріо)	Канада
+2FJ — 2FV	Freightliner of Canada Ltd	Бернабі (Британська Колумбія)	Канада
+2FW — 2FZ	Freightliner Sterling Division	Сент-Томас (Онтаріо)	Канада
+2G0 — 2G8	General Motors of Canada Limited	Ошава (Онтаріо)	Канада
+2G1	Chevrolet (Canada)	Ошава (Онтаріо)	Канада
+2G2	Pontiac (Canada)	Ошава (Онтаріо)	Канада
+2G4	Buick (відділ.General Motors Canada)	Ошава (Онтаріо)	Канада
+2GA — 2GY	General Motors of Canada Limited	Ошава (Онтаріо)	Канада
+2HF	Honda Canada Inc (мото)	Торонто (р-н Скарборо), (Онтаріо)	Канада
+2HG — 2HK	Honda Canada Inc	Торонто (р-н Скарборо), (Онтаріо)	Канада
+2HM	Hyundai Auto Canada Inc.	Бромон (Квебек)	Канада
+2HN	Honda Canada Inc	Торонто (р-н Скарборо), (Онтаріо)	Канада
+2HU	Honda Canada Inc (вант.)	Торонто (р-н Скарборо), (Онтаріо)	Канада
+2L1, 2LJ	Ford Motor Company of Canada Limited	Оквілл (Онтаріо)	Канада
+2LM, 2LN	Ford Motor Company of Canada Limited	Оквілл (Онтаріо)	Канада
+2ME, 2MH	Mercury (Canada)	Оквілл (Онтаріо)	Канада
+2MR	Ford Motor Company of Canada Limited	Оквілл (Онтаріо)	Канада
+2P2 — 2P8	Chrysler Canada Limited	Віндзор (Онтаріо)	Канада
+2PC	Prevost a div of Volvo Group Canada Inc	Сен-Клер, пров. Квебек	Канада
+2T1	Toyota Motor Mfg Canada Inc	Міссісога, (Онтаріо)	Канада
+2T2, 2T3	Toyota Motor Mfg Canada Inc	Кембридж (Онтаріо)	Канада
+2VC, 2VL	Volvo Canada Ltd	Галіфакс, пров. Нова Шотландія	Канада
+2WA — 2WY	Western Star Trucks Inc.	Міссісога (Онтаріо)	Канада
+2WE	Western Star Trucks Inc.	Келоуна (Британська Колумбія)	Канада
+2XE — 2XH	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+2XM	American Motors (Canada) Inc	Брамптон, провінція Онтаріо	Канада
+3A2 — 3A8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3AK, 3AL	DaimlerChrysler Vehiculos Comerciales	Сантьяго Тьянгістенко, штат Мехіко	Мексика
+3AX	Scania De Mexico SA de CV	Сан-Луїс-Потосі, штат Сан-Луїс-Потосі	Мексика
+3B2 — 3B8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3BE	Scania De Mexico SA de CV (автобуси)	Сан-Луїс-Потосі, штат Сан-Луїс-Потосі	Мексика
+3BH, 3BJ	Western Star Trucks	С'юдад-Саагун, штат Ідальго	Мексика
+3BN	Renault De Mexico SA de CV	Мехіко (р-н Чапультепек)	Мексика
+3BR, 3BS	Renault De Mexico SA de CV (вант.)	Мехіко (р-н Чапультепек)	Мексика
+3C2 — 3C8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3CE	Volvo Buses de Mexico SA de CV	Мехіко	Мексика
+3CZ, 3HG	Honda De México S.A. de C.V.	Ель-Сальто, штат Халіско	Мексика
+3D2 — 3D8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3E2 — 3E8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3F6	DaimlerChrysler de Mexico SA de CV	Мехіко (р-н Санта-Фе)	Мексика
+3FA — 3FE	Ford Motor Co SA de CV	Мехіко	Мексика
+3FM, 3FT	Ford Motor Co SA de CV	Мехіко	Мексика
+3G0 — 3GY	GM de Mexico S. de R.L. de C.V.	штат Сан-Луїс-Потосі	Мексика
+3G4	Buick (GM de Mexico)	штат Сан-Луїс-Потосі	Мексика
+3GY	Cadillac (вантажні) (GM de Mexico)	штат Сан-Луїс-Потосі	Мексика
+3H1	Honda De México S.A. de C.V. (мото)	Ель-Сальто, шт Халіско	Мексика
+3H3	Hyundai de Mexico SA de CV (прич.)	Тіхуана, штат Баха-Каліфорнія	Мексика
+3LN	Ford Motor Co SA (Hermosillo Assembly)	Ермосільйо, штат Сонора	Мексика
+3MA, 3ME	Ford Motor Co SA de CV	Мехіко	Мексика
+3MB	DaimlerChrysler Vehiculos Comerciales (автоб.)	Сантьяго Тьянгістенко, штат Мехіко	Мексика
+3MM	Renault De Mexico SA de CV	Аґуаскальєнтес, штат Аґуаскальєнтес	Мексика
+3MZ	Mazda Motor Manufacturing de Mexico S.A. de S.V.	Саламанка, штат Гуанахуато	Мексика
+3N1 — 3N8	Nissan Mexicana SA de CV	Куернавака, штат Морелос; Мехіко	Мексика
+3NA — 3ND	Blue Bird	Аподака, штат Нуево-Леон	Мексика
+3NP	Nissan Mexicana SA de CV (вант.)	Куернавака, штат Морелос; Мехіко	Мексика
+3P2 — 3P8	Chrysler De Mexico Toluca	Толука-де-Лердо, штат Мехіко	Мексика
+3T3	Nissan Mexicana SA de CV	Куернавака, штат Морелос	Мексика
+3TM	Toyota Motor Mfg De Baja California	Тіхуана, штат Баха-Каліфорнія	Мексика
+3VV, 3VW	Volkswagen de Mexico SA de CV	Пуебла, штат Пуебла	Мексика
+478	Honda of America Mfg Inc (MG)	Торренс, штат Каліфорнія; Морисвіль штат Огайо	США
+47U	Bus Industries of America Inc (Orion)	Оріскани, штат Нью-Йорк	США
+480, 49H	Daimler Trucks North America LLC	Портленд, штат Орегон	США
+4A3, 4A4	Mitsubishi Motors North America Inc	Нормал, штат Іллінойс	США
+4B3, 4B4	Mitsubishi Motors North America Inc	Нормал, штат Іллінойс	США
+4C3, 4J4,	Chrysler Group LLC	Оберн-Гіллс, штат Мічиган	США
+4CD, 4SF	Oshkosh Truck Corporation (сп. техн. )	Ошкош, штат Вісконсін	США
+4E3, 4E4	Mitsubishi Motors North America Inc	Нормал, штат Іллінойс	США
+4F2 — 4F4	Mazda (США)	Дірборн, штат Мічиган	США
+4G1 — 4G8	General Motors	Детройт, штат Мічиган	США
+4GD	General Motors (Opel USA)	Детройт, штат Мічиган	США
+4GL, 4GT	General Motors	Детройт, штат Мічиган	США
+4H0	Volvo Road Machinery (компресори)	Моксвіль, штат Північна Кароліна	США
+4JG	Mercedes-Benz US International Inc.	Венс, штат Алабама	США
+4KB — 4KL	General Motors	Детройт, штат Мічиган	США
+4L0	Mercury (Ford Motor Company)	Дірборн, штат Мічиган	США
+4M2 — 4M4	Mercury (Ford Motor Company)	Дірборн, штат Мічиган	США
+4MB	Mitsubishi Motors North America Inc	Нормал, штат Іллінойс	США
+4ML	Oshkosh Trailer Division (прич.)	Брейдентон, штат Флорида	США
+4MZ	Buell Motorcycle Company	Східний Трой, штат Вісконсин	США
+4N2 — 4N4	Mercury (Ford Motor Company)	Дірборн, штат Мічиган	США
+4NS — 4NW	General Motors	Детройт, штат Мічиган	США
+4P3, 4P4	Mitsubishi Motors North America Inc	Нормал, штат Іллінойс	США
+4S1, 4S2	Isuzu Motors America LLC	Віттьєр, штат Каліфорнія	США
+4S3, 4S4	Subaru of Indiana Automotive Inc	Лафайєт, штат Індіана	США
+4S5	Isuzu Motors America LLC	Віттьєр, штат Каліфорнія	США
+4T1	Toyota Motor Manufacturing Kentucky Inc	Джорджтаун, штат Кентуккі	США
+4T4	Toyota Motor Mfg Northern Kentucky Inc	Ерланґер, штат Кентуккі	США
+4TA	Toyota Auto Body Co Inc (вант.)	Лонг-Біч, штат Каліфорнія	США
+4US, 5UM	BMW Manufacturing Co LLC.	Спартанберг, штат Південна Кароліна	США
+4UZ, 5DH	Freightliner Custom Chassis Corp	Гаффні, штат Південна Кароліна	США
+4V1 — 4V8	Volvo Trucks North America	Дублін, штат Вірджинія	США
+4VA — 4VK	Volvo Trucks North America	Дублін, штат Вірджинія	США
+4W1 — 4W5	General Motors	Детройт, штат Мічиган	США
+4WT, 4WU	Oshkosh Truck Corporation (сп. техн. )	Ошкош, штат Вісконсін	США
+50Y	American Ironhorse LLC (мото)	Саут-Брідж, штат Массачусетс	США
+55S, 55W	Mercedes-Benz US International Inc.	Венс, штат Алабама	США
+5NB	Hyundai Motor Manufacturing Alabama LLC (автоб.)	Монтґомері, штат Алабама	США
+5NM, 5NP	Hyundai Motor Manufacturing Alabama LLC	Монтґомері, штат Алабама	США
+5NT	Hyundai Motor Manufacturing Alabama LLC (вант.)	Монтґомері, штат Алабама	США
+5BZ	Nissan Motor Mfg Corp USA (автоб.)	Кантон, штат Міссісіпі	США
+5CK, 5CJ	Western Star Trucks Inc.	Портленд, штат Орегон	США
+5DF	DaimlerChrysler Commercial (автоб.)	Ґрінсборо, штат Північна Кароліна	США
+5E1	Volvo Road Machinery (причепи)	Шіппенсбурґ, штат Пенсильванія	США
+5F2	Ford Motor Company[3]	Дірборн, Канзас, штат Канзас	США
+5FN — 5FS	Honda Manufacturing of Alabama LLC	Торренс, штат Каліфорнія; Лінкольн, штат Алабама	США
+5G1 — 5G8	General Motors	Детройт, штат Мічиган	США
+5GA	Buick (вант., відділ.General Motors)	Уоррен, Детройт, штат Мічиган	США
+5GB, 5GC	General Motors	Детройт, штат Мічиган	США
+5GD	General Motors (roadster)	Детройт, штат Мічиган	США
+5GJ — 5GM	General Motors	Детройт, штат Мічиган	США
+5GN	General Motors (вант.)	Детройт, штат Мічиган	США
+5GT	General Motors (Hummer)	Детройт, штат Мічиган	США
+5GZ	General Motors	Детройт, штат Мічиган	США
+5J0 — 5J8	Honda of America Mfg Inc	Торренс, штат Каліфорнія, Моррисвіль штат Огайо	США
+5KB, 5KC	Honda Manufacturing of Alabama LLC	Торренс, штат Каліфорнія; Лінкольн, штат Алабама	США
+5KJ, 5KK	Daimler Trucks North America LLC	Портленд, штат Орегон	США
+5L1, 5LM	Lincoln (Ford Motor Company)	Дірборн, штат Мічиган	США
+5LD, 5LT	Ford Motor Company	Дірборн, штат Мічиган	США
+5MZ	Buell Motorcycle Company	Мілуокі, штат Вісконсін	США
+5N1 — 5N3	Nissan Motor Mfg Corp USA	Смирна, штат Теннессі	США
+5NP	Hyundai Motor Manufacturing Alabama	Монтґомері, штат Алабама	США
+5P0	Thomas Built Buses Inc. (автоб.)	Хай-Пойнт, штат Північна Кароліна	США
+5S1	Suzuki Manufacturing of America Corp (мото)	Ром, штат Джорджія	США
+5S3	General Motors (багатоцільові)	Детройт, штат Мічиган	США
+5S4	Subaru of Indiana Automotive Inc (футурист.)	Лафайєт, штат Індіана	США
+5SA	Suzuki Manufacturing of America Corp	Ром, штат Джорджія	США
+5TB	Toyota Motor Manufacturing Indiana Inc	Принстон, штат Індіана	США
+5TD	Toyota Motor Manufacturing Indiana Inc (вант.)	Принстон, штат Індіана	США
+5TE	Toyota Motor Manufacturing California (вант.)	Фремонт, штат Каліфорнія	США
+5TF	Toyota Motor Manufacturing Texas Inc (вант.)	Сан-Антоніо, штат Техас	США
+5UX, 5YM	BMW Manufacturing Co LLC.	Спартанберг, штат Південна Кароліна	США
+5YF	Toyota Motor Manufacturing Mississippi	Блу Спрінґс, штат Міссісіпі	США
+5Z6	Nissan Motor Mfg Corp USA (вант.)	Смирна, штат Теннессі	США
+6AB	MAN Automotive (Australia) Pty	Сідней	Австралія
+6F1, 6F3	Renault (Australia) Pty Limited	Хейделберг (р-н Мельбурна), штат Вікторія	Австралія
+6F4	Nissan Motor Co Australia Pty Ltd	Клайтон (р-н Мельбурна), штат Вікторія	Австралія
+6F6	Mitsubishi Motors Australia Ltd (вант.)	Аделаїда (р-н Клоувеллі парк)	Австралія
+6FP — 6FT	Ford Motor Co of Australia Ltd	Кемпбелфілд (р-н Мельбурна), штат Вікторія	Австралія
+6G1, 6G2	GM Holdens Pty Ltd	Мельбурн (р-н Порт Мельбурн), Аделаїда	Австралія
+6H6	Honda Australia Motorcycles	Кемпбелфілд (р-н Мельбурна), штат Вікторія	Австралія
+6H8, 6HH	GM Holdens Pty Ltd	Мельбурн (р-н Порт Мельбурн), Аделаїда	Австралія
+6MM	Mitsubishi Motors Australia Ltd	Аделаїда (р-н Клоувеллі парк)	Австралія
+6MP	Ford Motor Co of Australia Ltd	Кемпбелфілд (р-н Мельбурна), штат Вікторія	Австралія
+6T1 — 6T3	AMI Toyota Ltd	Мельбурн (р-ни Порт Мельбурн та Алтона)	Австралія
+7A1	Mitsubishi Motors New Zealand Ltd	Поріруа, регіон Веллінгтон	Нова Зеландія
+7A2	Mazda Motors Of New Zealand Ltd	Окленд	Нова Зеландія
+7A3, 7B6	Honda New Zeland Limited	Манукау-Сіті (р-н Окленда)	Нова Зеландія
+7A4, 7B5	Toyota New Zealand Limited	Веллінгтон	Нова Зеландія
+7A5	Ford Motor Company Of New Zealand Ltd	Манукау-Сіті (р-н Окленда)	Нова Зеландія
+7A6	Subaru (Aust) Pty Ltd.	Веллінгтон	Нова Зеландія
+7A7	Nissan New Zealand Ltd	Манукау-Сіті (р-н Окленда)	Нова Зеландія
+7AB	Man Automotive (Nz) Ltd	Окленд	Нова Зеландія
+7B1	Suzuki New Zealand Ltd	Уонгануї	Нова Зеландія
+7B2	Nissan Diesel New Zealand Ltd (вант.)	Манукау-Сіті (р-н Окленда)	Нова Зеландія
+7B3	BMW New Zealand Limited	Ньюмаркет, район Окленда	Нова Зеландія
+7BC, 7BF	Mitsubishi Motors New Zealand Ltd	Поріруа, регіон Веллінгтон	Нова Зеландія
+8A1	Renault Argentina SA	Buenos Aires	Аргентина
+8A3	Scania Argentina SA	Сан-Мігель-де-Тукуман, провінція Тукуман	Аргентина
+8AB, 8AC	Mercedes-Benz Argentina S.A.	Пуерто-Мадеро, район Буенос-Айреса	Аргентина
+8AD, 8BC	Peugeot-Citroen Argentina SA	Вілла Бош провінція Буенос-Айрес	Аргентина
+8AE	Peugeot-Citroen Argentina SA (вант.)	Вілла Бош провінція Буенос-Айрес	Аргентина
+8AF	Ford Argentina SCA	Буенос-Айрес	Аргентина
+8AG	Chevrolet (General Motors De Argentina)	Буенос-Айрес	Аргентина
+8AJ	Toyota Argentina SA	Буенос-Айрес	Аргентина
+8AK	General Motors De Argentina Srl	Росаріо, пров. Санта-Фе	Аргентина
+8AV	Volkswagen Argentina SA	Сан-Хусто, пров. Буенос-Айрес	Аргентина
+8AW	Volkswagen Argentina SA	Генерал Пачецо, пров. Буенос-Айрес	Аргентина
+8AX — 8AZ	Volkswagen Argentina SA (автоб.)	Сан-Хусто, пров. Буенос-Айрес	Аргентина
+8B4	Mercedes-Benz Argentina S.A.	Проспект Авеніра-дел-Лібертадор, на шляху Буенос-Айрес-Сан-Фернандо	Аргентина
+8C3	Honda Motor de Argentina S.A. (Сіті)	Кампана, пров. Буенос-Айрес	Аргентина
+8CH	Honda Motor de Argentina S.A. (мото)	Флоренціо Варела, пров. Буенос-Айрес	Аргентина
+8ES	Mar Maquinarias S.A. (мото)	Буенос-Айрес	Аргентина
+8GG	General Motors Chile SA	Аріка	Чилі
+8LB, 8LD	Omnibus BB Transportes SA	Кіто	Еквадор
+8LE, 8LF	Maresa (Mazda)	Кіто	Еквадор
+8LH	General Motors Del Ecuador SA	Кіто	Еквадор
+8XA — 8XC	Toyota De Venezuela C A	Кумана, штат Сукре	Венесуела
+8XD	Ford Motor de Venezuela SA	Валенсія, пров. Карабобо	Венесуела
+8Y3 — 8Y8	Chrysler de Venezuela LLC	Валенсія, пров. Карабобо	Венесуела
+8YG, 8ZN	General Motors Of Venezolana	Валенсія, пров. Карабобо	Венесуела
+8YP, 8YT	Ford Motor de Venezuela SA	Валенсія, пров. Карабобо	Венесуела
+8Z1, 8ZB, 8ZC	General Motors Of Venezolana	Валенсія, пров. Карабобо	Венесуела
+935	Peugeot Citroen Do Brasil Automoveis Ltd (Citroën)	Порту Реал, р-н Ріо-де-Жанейро	Бразилія
+936	Peugeot Citroen Do Brasil Automoveis Ltd (Peugeot)	Порту Реал, р-н Ріо-де-Жанейро	Бразилія
+937	Chrysler Do Brasil Ltda	Сан-Паулу	Бразилія
+93C, 93T	General Motors do Brasil Ltda	Сан-Каетану-ду-Сул, штат Сан-Паулу	Бразилія
+93H	Honda Automoveis do Brasil Ltda	Сан-Паулу, штат Сан-Паулу	Бразилія
+93K, 9BV	Volvo do Brasil Veiculos Ltda	Куритиба, штат Парана	Бразилія
+93R	Ford Motor Co Brasil Ltda (вант.)	Сан-Паулу, округ Іпіранга	Бразилія
+93U	Volkswagen do Brasil Ltda	Сан-Жозе-дус-Піньяйс, штат Парана	Бразилія
+93X	Mmc Automotores Do Brasil S/A	Каталан, штат Гояс	Бразилія
+93Y	Renault Do Brasil Automoveis SA	Сан-Жозе-дус-Піньяйс, штат Парана	Бразилія
+94D	Nissan Do Brasil Automobeis Ltda	Сан-Жозе-дус-Піньяйс, штат Парана	Бразилія
+953	Volkswagen Trucks and Buses (VTB)	Резенді, штат Ріо-де-Жанейро	Бразилія
+95V	Dafra da Amazonia Industria e Comercio	Манаус, штат Амазонас	Бразилія
+95Z	Harley-Davidson DO Brasil Ltda	Манаус, штат Амазонас	Бразилія
+9B9/CV5	Volvo Equipamentos de Construcao	Куритиба, штат Парана	Бразилія
+9BC	DaimlerChrysler do Brasil Ltda	Сан-Жозе-дус-Кампус, штат Сан-Паулу	Бразилія
+9BF, 9BT	Ford Motor Co Brasil Ltda	Сан-Бернарду-ду-Кампу, штат Сан-Паулу	Бразилія
+9BH	General Motors Do Brasil S/A	Сан-Каетану-ду-Сул, штат Сан-Паулу	Бразилія
+9BH	Hyundai Motor Brasil Montadora	Пірасікаба, штат Сан-Паулу	Бразилія
+9BM	Mercedes-Benz do Brazil Ltda	Сан-Паулу	Бразилія
+9BR	Toyota Do Brasil S/A	Сан-Бернарду-ду-Кампу, штат Сан-Паулу	Бразилія
+9BS	Scania Latin America Ltda	Сан-Паулу (Сан-Бернарду-ду-Кампу)	Бразилія
+9BW	Volkswagen do Brasil Ltda	Сан-Бернарду-ду-Кампу, штат Сан-Паулу	Бразилія
+9C2	Moto Honda da Amazonia Ltda. (мото)	Сан-Паулу, штат Сан-Паулу	Бразилія
+9DB	Mercedes-Benz do Brazil Ltda (для США)	Сан-Паулу	Бразилія
+9DW	Volkswagen do Brasil Ltda (для США)	Сан-Паулу	Бразилія
+9F7	Jincheng de Columbia S.A. (Jincol S.A.) (мото)	Барранкілья	Колумбія
+9F9/084	CIA Autoensamble Nissan Ltda.	Санта-Фе-де-Богота́, департ. Кундінамарка	Колумбія
+9FA	Compañía Colombiana Automotriz (автоб.)	Богота	Колумбія
+9FB, 9FH, 9FP	Sofasa SA	Енвіґадо, департ. Антіокія	Колумбія
+9FC, 9FJ	Compañía Colombiana Automotriz (Mazda)	Богота	Колумбія
+9FS	Suzuki Motor de Colombia SA (мото)	Перейра, департамент Рісаральда	Колумбія
+9FT	Suzuki Motor de Colombia SA	Перейра, департамент Рісаральда	Колумбія
+9GA — 9GD	General Motors Colmotores SA	Санта-Фе-де-Богота́, департ. Кундінамарка	Колумбія
+9UP, 9UR	Dolce Vitta SA/Effa Motors	Монтевідео департ. Монтевідео	Уругвай
+9US	Dolce Vitta SA/Effa Motors (мото)	Монтевідео департ. Монтевідео	Уругвай
+9UL	Dolce Vitta SA/Effa Motors (вант.)	Монтевідео департ. Монтевідео	Уругвай
+AA9/PR1	Volvo Southern Africa	Джермістон, провінція Ґаутенг	ПАР
+AA9/RP1	Scania Trading	Міттелбург, провінція Мпумаланга	ПАР
+AAA, AAV	Volkswagen of South Africa Pty Ltd	Ейтенхахе, Східно-Капська провінція	ПАР
+AAM	Man Truck & Bus (Sa) (Pty) Ltd	Пайнтаун. пров. Квазулу-Наталь	ПАР
+ABM	Bmw (South Africa) (Pty) Ltd	Преторія, Росслін пров. Ґаутенг	ПАР
+ADB, AHM	Mercedes-Benz of SA (Pty) Ltd	Преторія	ПАР
+ADM, AGM	General Motors S African	Порт-Елізабет Східно-Капська провінція	ПАР
+ADN	Nissan SA (Pty) Ltd	Росслін, пров. Ґаутенг	ПАР
+AFA	Samcor (Pretoria) (Pty) Ltd	Преторія.	ПАР
+AFM	Ford Motor Company of SA (Pty) Ltd	Порт-Елізабет, Східно-Капська провінція	ПАР
+AFV	Mercedes-Benz of SA (Pty) Ltd (вант.)	Преторія	ПАР
+AHH, AHT	Toyota SA Mfg Ltd	Ісіпінго Пляж, пров. Квазулу-Наталь	ПАР
+AXL	Isuzu (Industries maghrébins Mécaniques)	Кайруан, вілаєт Кайруан	Туніс
+BF0	Honda Motorcycle Kenya Limited	Найробі, пров. Найробі	Кенія
+BKV	Kenya Vehicle Manufacturers Ltd (Mazda)	Тайка, Центральна провінція	Кенія
+BL0	Honda Nigeria Ltd. (мото)	Ота-Ота, штат Оґун	Нігерія
+CA1	General Motors Egypt	Місто ім. 6 Жовтня, пров. Гіза	Єгипет
+CF9/AV1	Renault Trucks (вант.)	Касабланка, р-н Аїн-ас-Сабах	Марокко
+CFA	Toyota Motor Engineering Egypt S.A.E.	Каїр	Єгипет
+CFH	Toyota Du Maroc	Касабланка, р-н Сіді	Марокко
+CFZ	Scania	Касабланка	Марокко
+CL9/001	Wallyscar	Ла-Марса	Туніс
+DAB	Acva/BMW Plant	Місто ім. 6 Жовтня, пров. Гіза	Єгипет
+DG1	SOMACA (Renault-Nissan Alliance)	Касабланка р-н Аїн-ас-Сабах	Марокко
+J8	Isuzu Motors Ltd.	Токіо (р-н Мінато)	Японія
+JA3-JA7	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+JA	Isuzu Motors Ltd.	Токіо (р-н Мінато)	Японія
+JB3 — JB7	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+JC0 — JС8	Mazda Motor Corporation	Футю, повіт Акі, преф. Хіросіма	Японія
+JD	Daihatsu	Ікеда, Префектура Осака	Японія
+JE3 — JE5	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+JE6, JE7	Mitsubishi Motors Corporation	Кавасакі (р-н Накахара), преф. Канаґава	Японія
+JF	Fuji Heavy Industries (Subaru)	Ота, преф. Ґумма; Токіо (р-н Шінджюку)	Японія
+JG	Suzuki Motor Corp	Хамамацу, префектура Сідзуока	Японія
+JGT, JGC	Suzuki Motor Corp (вант.)	Хамамацу, префектура Сідзуока	Японія
+JH	Hino (Toyota Motor Corporation)	Хіно, преф. Токіо	Японія
+JH1 — JH5	Honda Motor Company Ltd.	Токіо (р-н Мінато)	Японія
+JH2	Honda Motor Company Ltd. (мото)	Сайтама, префектура Сайтама	Японія
+JHM	Honda Motor Company Ltd.	Токіо (Район Шібуя)	Японія
+JHW — JHZ	Honda Motor Company Ltd.	Токіо (р-н Мінато)	Японія
+JJ3 — JJ6	Mitsubishi Motors Corporation	Кавасакі (р-н Накахара)	Японія
+JJ7	Mitsubishi Motors Corporation	Окадзакі, префектура Айті	Японія
+JK	KATO Works (автокрани)	Токіо (р-н Сінаґава)	Японія
+JK	Kawasaki (мото)	Акаші, преф. Хьоґо; Кобе; Токіо (р-н Мінато)	Японія
+JL	Mitsubishi FUSO Truck & Bus Corp.	Кавасакі (р-н Накахара)	Японія
+JM0 — JM8	Mazda Motor Corporation	Футю, повіт Акі, преф. Хіросіма	Японія
+JMA — JMX	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+JMZ	Mazda Motor Corporation	Футю, повіт Акі, преф. Хіросіма	Японія
+JN1 — JN8	Nissan	Йокогама (р-н Нісі); Токіо (р-н Чюо)	Японія
+JNA — JNF	UD Trucks	Аґео, Префектура Сайтама	Японія
+JNK — JNZ	Nissan	Йокогама (р-н Нісі); Токіо (р-н Чюо)	Японія
+JNX	Nissan (Infiniti)	Йокогама (р-н Нісі); Токіо (р-н Чюо)	Японія
+JP3 — JP5	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+JP6, JP7	Mitsubishi Motors Corporation	Кавасакі (р-н Накахара)	Японія
+JPA — JPE	UD Trucks	Аґео, Префектура Сайтама	Японія
+JR1 — JR8	Honda Motor Company Ltd.	Токіо (р-н Мінато)	Японія
+JS	Suzuki Motor Corp	Хамамацу, префектура Сідзуока	Японія
+JS1	Suzuki Motor Corp (мото)	Хамамацу, префектура Сідзуока	Японія
+JS4	Suzuki Motor Corp (вант.)	Хамамацу, префектура Сідзуока	Японія
+JSK, JSP	Suzuki Motor Corp (мото)	Хамамацу, префектура Сідзуока	Японія
+JT1 — JT8	Toyota Motor Corporation	Тойота, префектура Айті	Японія
+JTA — JTK	Toyota Motor Corporation	Тойота, префектура Айті	Японія
+JVW	Toyota Motor Corporation (вант.)	Тойота, префектура Айті	Японія
+JW3 — JW7	Mitsubishi Motors Corporation	Токіо (р-н Мінато)	Японія
+KL	Daewoo	Сеул	Південна Корея
+KL	GM Korea Company	Інчхон	Південна Корея
+KL4	Buick (GM Korea Company)	Інчхон	Південна Корея
+KLK, KLL	Samsung Commercial Vehicles Co Ltd	Тегу, провінція Кьонсан	Південна Корея
+KM	Hyundai	Сеул	Південна Корея
+KMN-KMR	Hyundai (вант.)	Чонджу, Північна провінція Чолла	Південна Корея
+KN	Kia	Сеул	Південна Корея
+KN1, KN2	Hyundai	Сеул	Південна Корея
+KNN-KNS	Hyundai	Сеул	Південна Корея
+KNM	Samsung Motors Inc	Пусан, Південна провінція Кьонсан	Південна Корея
+KNV	Hyundai	Сеул	Південна Корея
+KP	Ssangyong	Сеул	Південна Корея
+KPH	Hyundai	Сеул	Південна Корея
+KRT, KRU	Hyundai	Сеул	Південна Корея
+L62	Geely Group Zhejiang Motorcycle Co Ltd	Тайчжоу, пров. Чжецзян	КНР
+L6T	Geely	Ханчжоу, Нінбо, пров. Чжецзян	КНР
+L8A	Jinhua YoungMan Manufacturing Co Ltd	Цзіньхуа, пров. Чжецзян	КНР
+L9S	Jinan Qingqi Suzuki Motorcycle Co. Ltd	Цзінань, провінція Шаньдун	КНР
+LA9/FZC	Sinotruk (Hong Kong)	Гонконг	КНР
+LA9/JBF	Jinhua YoungMan Manufacturing Co Ltd	Цзіньхуа, пров. Чжецзян	КНР
+LA9/JNP	Jinhua YoungMan Manufacturing Co Ltd	Цзіньхуа, пров. Чжецзян	КНР
+LA9/LWJ	Qingling Motors Group Co Ltd	Чунцін	КНР
+LA9/RCH	Rongcheng HawTai Automobile Co.	Жунчен, пров. Шаньдун	КНР
+LBE	Beijing Hyundai Automotive Co Ltd	Пекін, р-н Шуньї	КНР
+LBM	Zongshen Piaggio Foshan Motorcycle Co Ltd (мото)	Фошань, пров. Ґуандун	КНР
+LBV	BMW Brilliance Automotive Ltd	Шеньян, пров. Ляонін	КНР
+LCN	Chongqing Lifan Automobile Co Ltd (вант)	Чунцін	КНР
+LDC	Dongfeng Peugeot Citroen Automobile	Ухань пров. Хубей	КНР
+LDN	South East Motor Co Ltd (автоб.)	Фучжоу, пров. Фуцзянь	КНР
+LE4, LEN	Beijing Benz-DaimlerChrysler Automotive	Пекін	КНР
+LF2	Shenyang Aircraft Corporation	Шеньян, пров. Ляонін	КНР
+LEF	Jiangling Motors Group (Ford)	Наньчан, прові. Цзянсі	КНР
+LET	Jiangling-Isuzu Motors	Наньчан, пров. Цзянсі	КНР
+LF3	Lifan Industry (Group) Co Ltd (мото)	Чунцін	КНР
+LFA	Ford Lio Ho Motor Co Ltd	Чхун-Лі, повіт Таоюань, Тайвань	КНР
+LFB, LFW	FAW Group	Чанчунь, пров. Гірин	КНР
+LFV	FAW-Volkswagen Automotive Co Ltd	Чанчунь, пров. Гірин	КНР
+LG1, LRH	Rongcheng HawTai Automobile Co.	Жунчен, пров. Шаньдун	КНР
+LG	Dongfeng Motor	Ухань, пров. Хубей; Сян'ян, пров. Хубей	КНР
+LGF	Dongfeng Automobile Co Ltd	Сян'ян, пров. Хубей	КНР
+LGW	Great Wall Motors	Баодін, пров. Хебей	КНР
+LGX	BYD Auto	Сіань, пров. Шеньсі	КНР
+LHB, LJB	Beijing Automotive Industry Holding Co.	Пекін, р-н Сюаньу	КНР
+LJ1, LK2	JAC	Хефей, пров. Аньхой	КНР
+LJC	Jincheng Corporation (мото)	Нанкін, пров. Цзянсу	КНР
+LJN	Zhengzhou Nissan Automobile Co Ltd	Чженчжоу, пров. Хенань	КНР
+LKC	Jiangxi Changhe Automobile Co. Ltd	Дзіндечжень, провінція Цзянсі	КНР
+LKH	Hafei Motor Co Ltd	Харбін, пров. Хейлунцзян	КНР
+LL6	Hunan Changfeng Manufacture Joint-Stock	Чанша, пров. Хунань	КНР
+LLB, LMB	Beijing Automotive Industry Holding Co.	Пекін, р-н Сюаньу	КНР
+LLV	Chongqing Lifan Passenger Vehicle Co	Чунцін	КНР
+LN1	Suzuki Industrial Company Limited	Новий Тайбей	Тайвань
+LNB, LPB	Beijing Automotive Industry Holding Co.	Пекін, р-н Сюаньу	КНР
+LPA	Changan PSA Automotomiles Co Ltd	Шеньчжень пров. Ґуандун	КНР
+LS1	Ziyang Nanjun Automobile Co. Ltd	Ченду, пров. Сичуань	КНР
+LS4 — LS6	Chongqing Changan Automobile Co Ltd	Чунцін	КНР
+LSC, LSL	Chongqing Changan Automobile Co Ltd (вант.)	Чунцін	КНР
+LSG	Shanghai General Motors Corp Ltd	Шанхай	КНР
+LSV	Shanghai Volkswagen Automotive Co Ltd	Аньтін, р-н Цзядін м. Шанхаю	КНР
+LTN	South East (Fu Jian) Motor Corporation Ltd	Фучжоу, пров. Фуцзянь	КНР
+LTV	FAW Group	Чанчунь, пров. Цзілінь	КНР
+LTV	Toyota Tianjin	Тяньцзінь	КНР
+LUC	Honda Automobile (China) Co Ltd.	Гуанчжоу, пров. Ґуандун	КНР
+LUD	Dongfeng Nissan Diesel Motor Co Ltd	Ханчжоу, пров. Чжецзян	КНР
+LV7	Jinan Qingqi Motorcycle Co. Ltd	Цзінань, провінція Шаньдун	КНР
+LVF	Jiangxi Changhe Suzuki Automobile Co Ltd	Дзіндечжень, провінція Цзянсі	КНР
+LVG	Guangzhou Toyota Motor Co Ltd	Гуанчжоу, пров. Ґуандун	КНР
+LVH	Dongfeng Honda Automobile Co Ltd	Ухань, пров. Хубей	КНР
+LVR	Changan Mazda Automobile Co Ltd	Нанкін, пров. Цзянсу	КНР
+LVS	Chang'an Ford Mazda Motor Company	Чунцін	КНР
+LWL	Qingling Motors Co Ltd	Чунцін	КНР
+LZG	Shaanxi Automobile Group Co Ltd	Сіань, пров. Шеньсі	КНР
+LZM	Lion Bus Co Ltd (автобуси MAN)	Цзіньхуа, пров. Чжецзян	КНР
+LZS	Zongshen Industrial Group (мото)	Чунцін	КНР
+LZU	Guangzhou Isuzu Bus Co Ltd (автоб.)	Гуанчжоу пров. Ґуандун	КНР
+LZW	SAIC GM Wuling Automobile Co Ltd	Лючжоу, Ґуансі-Чжуанський авт. р-н	КНР
+LZY	Zhengzhou Yutong Bus Co Ltd	Чженчжоу, пров. Хенань	КНР
+MA2 — MA4	Maruti Suzuki India Ltd	Нью-Делі, р-н Васант-Кунджі	Індія
+MA5	Maruti Suzuki India Ltd (вант.)	Нью-Делі, р-н Васант-Кунджі	Індія
+MA6, MCB	General Motors India Ltd	Халол, штат Гуджарат, Ґурґаон, штат Хар'яна	Індія
+MA7	Hindustan Motors Ltd	Колката, штат Західний Бенгал	Індія
+MA7	Hindustan Motors Ltd	Ченнаї, штат Тамілнаду	Індія
+MAB — MAF	Mahindra & Mahindra Ltd	Мумбаї, штат Махараштра	Індія
+MAJ	Ford India Ltd	Ченнаї, р-н Ченгалпатту, Сананд, штат Гуджарат	Індія
+MAK	Honda Siel Cars India Ltd	Велика Нойда, штатУттар-Прадеш	Індія
+MAL	Hyundai Motor India Ltd	Сріперумбудур, штат Тамілнаду	Індія
+MAT	Tata Motors	Мумбаї, р-н Форт Ґеорґ, штат Махараштра	Індія
+MB1	Ashok Leyland Ltd	Ченнаї (р-н Нанданам), штат Таміл-Наду	Індія
+MB2, MB6	Hyundai Motor India Ltd	Сріперумбудур, штат Тамілнаду	Індія
+MB7, MC9/RE1	Mahindra Reva Electric Vehicles Private	Бенґалуру, штат Карнатака	Індія
+MB8	Suzuki Motorcycle India Pvt Ltd (мото)	Ґурґаон, штат Хар'яна	Індія
+MBH	Maruti Suzuki India Ltd	Ґурґаон, штат Хар'яна	Індія
+MBJ	Toyota Kirloskar Motor Pvt Ltd	Бенґалуру, штат Карнатака	Індія
+MBK	Man Trucks India Pvt Ltd.	Пітхампур, штат Мадх'я-Прадеш	Індія
+MBR	Mercedes-Benz India Private Limited	Пімпрі-Пуне, сателіт м. Пуне	Індія
+MBU	SML Isuzu Limited	Рупнаґар, штат Пенджаб	Індія
+MBU	SML Isuzu Limited (Swaraj Mazda)	Чандігарх, штат Пенджаб	Індія
+MC1	Force Motors Limited	Пуне, штат Махараштра	Індія
+MC6	Volvo Buses India Private Limited	Бенґалуру, штат Карнатака	Індія
+MDH	Renault Nissan Automotive India	Канчіпурам, штат Таміл-Наду	Індія
+ME4	Honda Motorcycle&Scooter India Pvt Ltd	Нью-Делі	Індія
+MEC	Daimler India Commercial Vehicles Pvt Lt	Ченнаї, штат Таміл-Наду	Індія
+MEE	Renault Nissan Automotive India Pvt Ltd	Ченнаї (р-н Ораґадам), штат Таміл-Наду	Індія
+MEK	Ashok Leyland Nissan Vehicles Ltd	Ченнаї (р-н Нанданам), штат Таміл-Наду	Індія
+MEX	Volkswagen India Pvt Ltd	Чакан, штат Махараштра	Індія
+MEY	M/s Volvo India Private Limited	Бенґалуру, штат Карнатака	Індія
+MFA, MFB	PT General Motors Buana Indonesia	Бекасі, (р-н Пондок Унґу), пров. Західна Ява	Індонезія
+MH1	PT Federal Motor (мото Honda)	Джакарта	Індонезія
+MH8	PT Suzuki Indomobil Motor (мото)	Бекасі, столичний регіон Джакарта	Індонезія
+MHD	PT Indomobil Suzuki International	Бекасі, столичний регіон Джакарта	Індонезія
+MHE	PT National Motor Co (Mazda)	Джакарта	Індонезія
+MHF	PT Toyota Astra Motor	Джакарта	Індонезія
+MHH	PT Tjahya Sakti Motor Corp	Джакарта	Індонезія
+MHL	PT German Motor Manufacturing	Західна Ява	Індонезія
+MHM	PT Krama Yudha	Джакарта	Індонезія
+MHR	PT Prospect Motor	Джакарта	Індонезія
+ML3	Mitsubishi Motors (Thailand) Co Ltd	Кхлонґ Луанґ, провінція Патхумтхані	Таїланд
+ML4, MLA	Thai Chrysler Automotive Ltd	Бангкок	Таїланд
+MLC	Thai Suzuki Motor Co Ltd	р-н Тханіабурі, провінція Патхумтхані	Таїланд
+MLH	Thai Honda Manufacturing Co Ltd	Бангкок	Таїланд
+MM0 — MM8	Auto Alliance (Thailand) Co Ltd	Плаукданґ, пров. Районґ	Таїланд
+MMA — MME	Mitsubishi Motors (Thailand) Co Ltd	Кхлонґ Луанґ, провінція Патхумтхані	Таїланд
+MMF	BMW Manufacturing (Thailand) Co Ltd	Амата, пров. Районґ	Таїланд
+MMT	Mitsubishi Motors (Thailand) Co Ltd	Кхлонґ Луанґ, провінція Патхумтхані	Таїланд
+MMZ, MNZ	Auto Alliance (Thailand) Co Ltd	Плаукданґ, пров. Районґ	Таїланд
+MN1	Siam Motors&Nissan Sales Co Ltd	р-н Бан Плі, пров. Самутпракан	Таїланд
+MN3, MP3	Mitsubishi Motors (Thailand) Co Ltd	Кхлонґ Луанґ, провінція Патхумтхані	Таїланд
+MN9/CH2	MAN Truck & Bus Concessionaires	Бангкок	Таїланд
+MNT	Nissan Motor (Thailand) Co. Ltd.	р-н Бан Сао Тхон, пров. Самутпракан	Таїланд
+MPA	Chevrolet (Isuzu Motors Co.(Thailand))	Самрон, р-н Пра Прадайон, пров. Самутпракан	Таїланд
+MPA	Isuzu Motors Company (Thailand) Ltd	Самрон, пров. Самутпракан	Таїланд
+MPB	Ford Motor Company (Thailand) Ltd	Чонбурі, пров. Чонбурі	Таїланд
+MR0	Toyota Motor Thailand Co Ltd	Чачоенґсао, пров. Чачоенґсао	Таїланд
+MR1 — MR8	Toyota Motor Thailand Co Ltd	р-н Самрон, пров. Самутпракан	Таїланд
+MRH	Honda Automobile (Thailand) Co Ltd	Аюттхая, пров. Аюттхая	Таїланд
+MS3	Suzuki Myanmar Motor Co. Ltd	Саут-Даґон-Тауншип , округ Янгон	М'янма
+N4S	Saipa Kashan	Кашан, остан Ісфахан	Іран
+NAB	Iran Khodro Diesel	Кередж, остан Альборз	Іран
+NAD	Saipa Diesel	Тегеран	Іран
+NAG	Bahman Industrial Group (Mazda)	Кередж, передмістя Тегерана	Іран
+NAK	Kerman Motor	Бам остан Керман	Іран
+NAS	Saipa Co	Тегеран	Іран
+NCN	Bahman Motor (мото)	Семнан, остан Семнан	Іран
+NF1	PAK Suzuki Motor Co Ltd (мото)	Бін-Касім, провінція Сінд	Пакистан
+NF2	PAK Suzuki Motor Co Ltd	Бін-Касім, провінція Сінд	Пакистан
+NFB	Honda Atlas Cars Pakistan Ltd	Лахор, пров. Пенджаб	Пакистан
+NL9/001	Man Kamyon Ve Otobus San AS	Стамбул	Туреччина
+NLA	Honda Turkiye AS	Ґебзе, іл Коджаелі	Туреччина
+NLE, NLG	Mercedes-Benz Türk A S (вант.)	Стамбул	Туреччина
+NLH, NLJ	Hyundai Assan	Стамбул, р-н Кадикьой	Туреччина
+NLN	Karsan Otomotiv Sanayi ve Ticaret A.Ş.	Бурса, іл Бурса	Туреччина
+NLR	Otokar	Станбул	Туреччина
+NLT	TEMSA	Адана	Туреччина
+NM0	Ford Otomotiv Sanayi AS	Стамбул, р-н Санджактепе, іл Стамбул	Туреччина
+NM1	Oyak Renault Otomobil Fabrikaları A.Ş.	Бурса, іл Бурса	Туреччина
+NMA	Man Turkiye AS	Анкара	Туреччина
+NMB	Mercedes-Benz Türk A S	Стамбул	Туреччина
+NMC	BMC Sanayi Ve Ticarct AS	Ізмір, іл Ізмір	Туреччина
+NMH	Honda Anadolu Motosiklet	Стамбул (р-н Картал)	Туреччина
+NMT	Toyota Motor Europe (Turkey)	Адапазари, р-н Аріфіє, іл Сакар'я	Туреччина
+NNA	Anadolu Isuzu Otomotiv San.A.S.	Стамбул (р-н Картал)	Туреччина
+NNC	Lifan Motosiklet San ve Tic Ltd Sti	Кілімлі, іл Дюздже	Туреччина
+NNN	Otokar (автоб.)	Адапазари, іл Сакар'я	Туреччина
+NS2	JV MAN Auto — Uzbekistan	Самарканд	Узбекистан
+NSA	SamKoçAuto (SamAuto) (автоб.)	Самарканд	Узбекистан
+NSB	SamKoçAuto (SamAuto)	Самарканд	Узбекистан
+PA1, PA2	Toyota Motor Philippines Corp.	Санта-Роса, пров. Лагуна	Філіппіни
+PAA — PAC	Isuzu Philippines Corporation	Біньян, пров. Лагуна	Філіппіни
+PAC	GM (Isuzu Philippines Corporation)	Біньян, пров. Лагуна	Філіппіни
+PAD	Honda Cars Philippines Inc	Санта-Роса, пров. Лагуна	Філіппіни
+PAE	Mitsubishi Motors Philippines Corp	Каінта, пров. Рісаль	Філіппіни
+PAF	Columbian Motors Co (Subaru)	Паранак, (столичний регіон Маніла)	Філіппіни
+PE1 — PE4	Ford Motor Co Philippines Inc	Санта-Роса, пров. Лагуна	Філіппіни
+PL1	Proton Holdings Berhad	Шах-Алам, провінція Селангор	Малайзія
+PLM	Lion Suzuki Motor Sdn Bhd	Шах-Алам	Малайзія
+PLP	TC Subaru Sdn. Bhd	Петалінґ, провінція Селангор	Малайзія
+PLZ	Isuzu HICOM Malaysia Sdn. Bhd.	Пекан, штат Паханг	Малайзія
+PM1	Auto Bavaria A Division Tractors	Шах-Алам, провінція Селангор	Малайзія
+PMA	Man Truck & Bus (M) Sdn Bhd	Раван, пров. Селангор	Малайзія
+PMB	DaimlerChrysler Malaysia Sdn Bhd	Куала-Лумпур	Малайзія
+PMH	Honda Malaysia Sdn Bhd	Алох-Ґаях, Губернаторство Малакка	Малайзія
+PMK	Boon Siew Honda Sdn Bhd	Баттерворс, штат Пенанг	Малайзія
+PMS	Suzuki Assemblers Malaysia Sdn Bhd	Пірай	Малайзія
+PMV	Volvo Malaysia Sdn Bhd	Шах-Алам, провінція Селангор	Малайзія
+PMZ	Cycle & Carriage Bintang Berhad	Петалінг-Джайя, пров. Селангор	Малайзія
+PN1 — PN3	UMW Toyota Motor Sdn Bhd	Шах-Алам, пров. Селангор	Малайзія
+PN4	UMW Toyota Motor Sdn Bhd (автоб.)	Шах-Алам, пров. Селангор	Малайзія
+PNV	Volvo Car Malaysia Sdn Bhd	Мід Веллі Сіті, район Куала-Лумпур	Малайзія
+PPP	Suzuki Malaysia Automobile Sdn Bhd	Шах-Алам	Малайзія
+PPV	Volkswagen Passenger Cars Malaysia	Банґсар (приміська зона Куала-Лумпур)	Малайзія
+PR8	Ford Malaysia Sdn Bhd	Шах-Алам, пров. Селангор	Малайзія
+PS0	Bangladesh Honda Private Limited	Шріпур, р-н Газіпур	Бангладеш
+PSA, PSB	Pragoti Industries Ltd	Читтаґонґ, округ Читтаґонґ	Бангладеш
+RFM — RFP	Taiwan Isuzu Motors Co Ltd	Чун-Сянь	Тайвань
+RHA, RHB	Ford Lio Ho Motor Co Ltd	Чхун-Лі, повіт Таоюань	Тайвань
+RKT	Honda Taiwan Co Ltd	Піндун, повіт Піндун	Тайвань
+RL0	Ford Vietnam Limited	Хайзионг, пров. Хайзионг	В'єтнам
+RL1	Vietnam Suzuki Corporation	Б'єнхоа, провінція Донгнай	В'єтнам
+RL2, RL3	Ford Vietnam Limited (вант., автоб.)	Хайзионг, пров. Хайзионг	В'єтнам
+RL4	Toyota Motor Vietnam Co Ltd.	Фук'єн, пров. Віньфук	В'єтнам
+RL5, RL8	LiFan Vietnam	р-н Йєн Му, пров. Хинг'єн	В'єтнам
+RLD, RLE	Isuzu Vietnam Co Ltd	Хошимін	В'єтнам
+RLF	Vietnam Motors Corp (Mazda)	Ханой, район Тханьсуан	В'єтнам
+RLF	Chevrolet (GM Vietnam Motor Company)	Ханой, р-н Тхан Трі	В'єтнам
+RLH	Honda Vietnam Company Ltd (мото)	Ханой	В'єтнам
+RLM	Mercedes-Benz Vietnam Ltd	Хошимін	В'єтнам
+RLS	Vietnam Suzuki Corporation (мото)	Б'єнхоа, провінція Донгнай	В'єтнам
+RS1, RS2	Isuzu Motors Saudi Arabia Company	Ель-Хубар, провінція Еш-Шаркія	Саудівська Аравія
+SA9/062	AC Cars Ltd	Вейбридж, графство Суррей	Велика Британія
+SA9/078	Nissan Motorsports International Co Ltd	Дідкот, графство Оксфордшир	Велика Британія
+SA9/261	AC Cars Ltd (спорт.)	Вейбридж, графство Суррей	Велика Британія
+SAJ	Jaguar (Jaguar Land Rover Limited)	Ковентрі (р-н Вайтлі)	Велика Британія
+SAL	Land Rover (Jaguar Land Rover Limited)	Гейдон та Лайтхорн, гр. Ворікшир	Велика Британія
+SAR, SAX	Rover Group Ltd	Бірмінгем (р-н Лонгбрідж)	Велика Британія
+SB1	Toyota Motor Manufacturing (UK) Ltd	Барнестон, графство Дербішир	Велика Британія
+SBE	Rover Group Ltd	Бірмінгем (р-н Лонгбрідж)	Велика Британія
+SCA	Rolls-Royce Motor Cars Ltd	Дербі, гр.Дербішир	Велика Британія
+SCA	Rolls-Royce Motor Cars Ltd	Вестхемпнет, гр.Західний Сассекс	Велика Британія
+SCB	Bentley Motors Ltd	Кру, графство Чешир	Велика Британія
+SCC	Lotus Cars Limited	Хетел, графство Норфолк	Велика Британія
+SCF	Aston Martin Lagonda Ltd	Гейдон, графство Ворікшир	Велика Британія
+SCV	Volvo Truck & Bus Ltd	Ірвін, обл. Північний Ершир	Велика Британія
+SDA	Chrysler Uk Limited	Ковентрі (р-н Вайтлі)	Велика Британія
+SDD	Chrysler Uk Limited	Данстабл, графство Бедфордшир	Велика Британія
+SDG	Renault Vi United Kingdom Ltd	Данстабл, графство Бедфордшир	Велика Британія
+SED	Vauxhall (IBC Vehicles) (вант., автоб.)	Лутон, графство Бедфордшир	Велика Британія
+SFA	Ford Motor Co Ltd	Брентвуд, графство Ессекс	Велика Британія
+SHE	Force Protection Europe (військ.техн.)	Ройял-Лемінґтон-Спа, графство Ворікшир	Велика Британія
+SHH, SHR	Honda UK Ltd	Суіндон (с. Півд. Марстон) графство Вілтшир	Велика Британія
+SHJ, SHS	Honda of the UK Mfg Ltd	Суіндон (с. Півд. Марстон) графство Вілтшир	Велика Британія
+SJA	Bentley Motors Ltd	Кру, графство Чешир	Велика Британія
+SJK, SJN	Nissan Motor Manufacturing (UK) Ltd	Сандерленд (Тайн і Вір), графство Тайн і Вір	Велика Британія
+SKF	Vauxhall (Vauxhall Motors Ltd)	Лутон, графство Бедфордшир	Велика Британія
+SLV	Volvo Bus Ltd	Лейленд, графство Ланкашир	Велика Британія
+SMP	Blue Bird (UK)	Естфілд, пригород Скарборо	Велика Британія
+SUA	Autosan SA	Сянік	Польща
+SUF	Fiat Auto Poland	Бельсько-Бяла, Тихи	Польща
+SUH	Polska Fabryka Samochodow S A	Ниса, Опольське воєводство	Польща
+SUJ	Jelczanskie Zaklady Samochowdowe	Єльч-Лясковіце, Нижньосілезьке воєводство	Польща
+SUP	FSO (FSO Warszawa)	Варшава	Польща
+SUP	Opel (GM Manufacturing Poland Sp.)	Глівіце, Сілезьке воєводство	Польща
+SUR	FSR (Tarpan)	Познань	Польща
+SUS	Man Star Trucks & Busses Sp.Z O.O.	Стараховіце, Свентокшиське воєводство	Польща
+SVZ	Mercedes-Benz Sobieslaw Zasada	Варшава	Польща
+SZA	Scania Production Slupsk S A	Слупськ, Поморське воєводство	Польща
+TK9/AH2	AVIA Kutna Hora a s (сп. техн. )	Кутна Гора	Чехія
+TM9/SE3	SKODA ELECTRIC s.r.o. (тролейбуси)	Плзень, Плзенський край	Чехія
+TM9/SK3	SKODA OSTROV s.r.o. (тролейбуси)	Остров, Карловарський край	Чехія
+TM9/TE2	TEDOM TRUCK s.r.o. (вант.)	Яблонець-над-Нисою, Ліберецький край	Чехія
+TM9/TE6	TEDOM s.r.o. (автоб.)	Тршебич, Край Височина	Чехія
+TMA, TMC	Hyundai Motor Manufacturing Czech s.r.o.	Острава	Чехія
+TMB	Škoda Auto	Млада-Болеслав	Чехія
+TMD	Škoda Engineering Plzen	Дишина, Плзенський край	Чехія
+TMP	Škoda Holding	Плзень, Плзенський край	Чехія
+TMS	Bratislavske Automobilove Zavody	Братислава	Словаччина
+TMT	Tatra	Копрживніце	Чехія
+TMW, TMX	Škoda Auto	Млада-Болеслав	Чехія
+TNA, TNH	Avia Hamilton Standard[4]	Прага	Чехія
+TND	Hyundai Motor Manufacturing Czech s.r.o.	Острава	Чехія
+TNL	Libereck Automobilove Zavody (вант)	Яблонець-над-Нисою, Ліберецький край	Чехія
+TRA	Ikarus	Будапешт, Секешфегервар	Угорщина
+TRR	RÁBA Automotive Holding PLC	Дьйор	Угорщина
+TRU	Audi Hungaria Motor Kft	Дьйор	Угорщина
+TS9/150	VW-Bau Kereskedelmi es Szolgaltato Bt (мото)	Будапешт	Угорщина
+TSM	Magyar Suzuki Corporation Ltd	Естерґом, медьє Комаром-Естерґом	Угорщина
+TW2	Ford Lusitana SARL	Лісабон	Португалія
+TW3	Renault Protuguesa SARL	Лісабон	Португалія
+TW8	General Motors De Portugal Lda	Лісабон	Португалія
+TWG	CaetanoBus Fabricacao de Carrocarias SA	Віл-Нова-ді-Гайя, округ Порту	Португалія
+TY1	Mitsubishi Motors de Portugal SA Paulo	Віла-Франка-де-Шіра, округ Лісабон	Португалія
+TYA, TYB	Mitsubishi Trucks Europe - Sociedad De	Абрантіш (р-н Трамагал), округ Сантарен	Португалія
+U5Y	KIA Motors Slovakia s.r.o.	Жиліна, Жилінський край	Словаччина
+U6Y, U7Y	KIA Motors Slovakia s.r.o. (вант, автоб.)	Жиліна, Жилінський край	Словаччина
+UD6	Škoda-Sipox Slovakia AS (самоскиди)	Бановце над Бебравоу, Тренчинський край	Словаччина
+UN3	Toyota (Ireland) Limited	Дублін	Ірландія
+UU0	Ford Romania	Крайова, жудець (повіт) Долж	Румунія
+UV1	Automobile Dacia	Пітешті, жудець Арджеш	Румунія
+UVA	ARO S.A	Кимпулунг, жудець Арджеш	Румунія
+VA0	ÖAF (Gräf & Stift)	Флорідсдорф	Австрія
+VAB	Magna Steyr Fahrzeugtechnik (автоб.)	Обервальтерсдорф	Австрія
+VAC	Chrysler Corporation (Австрія)	Грац, (р-н Лібенау)	Австрія
+VAG	Magna Steyr Fahrzeugtechnik AG&Co	Обервальтерсдорф	Австрія
+VAF, VAL	Magna Steyr Fahrzeugtechnik (сільг.)	Обервальтерсдорф	Австрія
+VAM	Magna Steyr Fahrzeugtechnik (мото)	Обервальтерсдорф	Австрія
+VAN	MAN Nutzfahrzeuge Osterreich AG	Штайр, Верхня Австрія	Австрія
+VBA	Magna Steyr Fahrzeugtechnik (вант.)	Обервальтерсдорф	Австрія
+VF1, VMK	Renault S.A.	Булонь-Біянкур	Франція
+VF2, VF6	Renault Trucks SAS	Ліон (р-н Ла Парт-Дьє)	Франція
+VF3	Automobiles Peugeot S.A.	Париж	Франція
+VF7	Automobiles Citroën S.A.	Париж	Франція
+VF9/276	Volvo Road Machinery (причепи)	Трапп	Франція
+VF9/300	EvoBus France	Сарсель, департамент Валь-д'Уаз	Франція
+VF9/565	Renault S.A. (прич.)	Булонь-Біянкур	Франція
+VF9/652	Automobiles Peugeot S.A. (авто-дачі)	Корбей деп. Луаре	Франція
+VF9/664	Scania Production Angers Sa (автобуси)	Анже, департамент Мен і Луара	Франція
+VF9/795	Bugatti	Вольфсбург	Німеччина
+VF9/795	Bugatti	Шато Сен-Жан (Дорлісайм), округ Мольсхайм	Франція
+VG6 — VG8	Renault Trucks SAS	Ліон (р-н Ла Парт-Дьє)	Франція
+VGA	Ste Peugeot Motocycle (мотоцикли)	Валантіньє департамент Ду	Франція
+VLG	Aixam/Mega	Екс-ле-Бен, департамент Савойя	Франція
+VLU	Scania Production Angers Sa	Анже, департамент Мен і Луара	Франція
+VNK	Toyota Motor Manufacturing France	Валансьєнн	Франція
+VNV	Renault S.A.	Гіянкур	Франція
+VS6	Ford España SA	Мадрид, Валенсія	Іспанія
+VS7, VS8	Citroën España SA	Мадрид	Іспанія
+VS9/001	Setra SA	Мадрид	Іспанія
+VS9/016	Carrocerias Irizar (автобуси Volvo)	Ормайстегі, пров. Гіпускоа	Іспанія
+VS9/172	EvoBus Iberica SA	Кастро-Урдіалес, провінція Кантабрія	Іспанія
+VSA	Mercedes-Benz España SA	Мадрид	Іспанія
+VSB, VSD	Renault Trucks SAS	Мадрид	Іспанія
+VSE, VSF	Santana Motor S.A.	Лінарес, Хаен	Іспанія
+VSG — VSL	Nissan Motor Iberica SA	Барселона, Каталонія	Іспанія
+VSS	SEAT	Барселона, Мартурель	Іспанія
+VSX	General Motors España SA	Фігеруелас, пров. Сарагоса	Іспанія
+VSY, VSZ	Renault Trucks SAS	Мадрид, Вальядолід	Іспанія
+VTT, VTU	Suzuki Motors España SA	Хіхон, провінція Астурія	Іспанія
+VWA	Nissan Motor Iberica SA	Барселона, Каталонія	Іспанія
+W04 — W08	Adam Opel AG	Рюссельсхайм, земля Гессен	Німеччина
+W09/B09	Bitter Automobile	Швельм, земля Північний Рейн-Вестфалія	Німеччина
+W09/B16	Brabus Autosport (спорт)	Боттроп, земля Північний Рейн-Вестфалія	Німеччина
+W09/K78	Wilhelm Karmann GmbH (Volkswagen)	Оснабрюк, земля Нижня Саксонія	Німеччина
+W09/R44	Rheinmetall Landsysteme Gmbh (спец.)	Кіль, федеральна земля Шлезвіг-Гольштейн	Німеччина
+W09/R55	Rheinmetall MAN Military Vehicles (колісні)	Мюнхен	Німеччина
+W09/V16	Volkswagen Motorsport	Ганновер, земля Нижня Саксонія	Німеччина
+W09/V18	Volkswagen Individual	Вольфсбург, земля Нижня Саксонія	Німеччина
+W0L	Adam Opel AG	Рюссельсхайм, земля Гессен	Німеччина
+WA1	Audi AG	Інґольштадт, земля Баварія	Німеччина
+WAG, WMA	MAN Truck & Bus	Мюнхен	Німеччина
+WAP	Alpina Burkard Bovensiepen GmbH	Бухлое, федеральна земля Баварія	Німеччина
+WAU	Audi AG	Неккарзульм, земля Баден-Вюртемберґ	Німеччина
+WB1	BMW Motorrad (мото)	Мюнхен, федеральна земля Баварія	Німеччина
+WBA, WBW	Bayerische Motoren Werke	Мюнхен, федеральна земля Баварія	Німеччина
+WBJ	Bitter Gmbh & Co Kg	Швельм, земля Північний Рейн-Вестфалія	Німеччина
+WBS	BMW Motorsport GmbH (спорт.)	Мюнхен, федеральна земля Баварія	Німеччина
+WBX	Bayerische Motoren Werke (спорт.)	Мюнхен, федеральна земля Баварія	Німеччина
+WBY, WBZ	Bayerische Motoren Werke	Мюнхен, федеральна земля Баварія	Німеччина
+WC3	Daimler AG	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WCD	Daimler AG (Sprinter)	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WD	Daimler AG	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WD1 — WD4	Daimler AG (Sprinter)	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WD2, WD5	Daimler AG (для NAFTA/Freightliner)	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WD8	Daimler AG (Transporter)	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WDC, WDD	Daimler AG/DaimlerChrysler	Штутгарт	Німеччина
+WDW	Daimler AG (автоб.)	Штутгарт, земля Баден-Вюртемберґ	Німеччина
+WEB, WKK	EvoBus GmbH	Кірхгайм-унтер-Тек, земля Баден-Вюртемберґ	Німеччина
+WF0 — WF8	Ford Werke AG	Кельн	Німеччина
+WME	Daimler AG/Daimler Chrysler	Штутгарт	Німеччина
+WMW	Bayerische Motoren Werke	Мюнхен, федеральна земля Баварія	Німеччина
+WMW	Mini (BMW)	Мюнхен	Німеччина
+WMX	Mercedes-AMG GmbH (спорт)	Аффальтербах, земля Баден-Вюртемберґ	Німеччина
+WP0	Porsche	Штутгарт	Німеччина
+WP1	Porsche	Weissach (Штутгарт)	Німеччина
+WRV	Rheinmetall MAN Military Vehicles (військ.)	Мюнхен	Німеччина
+WTD	Toyota Motorsport GmbH	Кельн	Німеччина
+WU1	quattro GmbH	Інґольштадт, земля Баварія	Німеччина
+WUA	quattro GmbH	Неккарзульм, земля Баден-Вюртемберґ	Німеччина
+WV0	Volkswagen AG	Вольфсбург, земля Нижня Саксонія	Німеччина
+WV1 — WV3	Volkswagen Nutzfahrzeuge (вант.)	Ганновер, земля Нижня Саксонія	Німеччина
+WV4 — WV8	Volkswagen AG	Вольфсбург, земля Нижня Саксонія	Німеччина
+WVA — WVL	Volkswagen AG	Вольфсбург, земля Нижня Саксонія	Німеччина
+WVM	Arbeitsgemeinschaft VW-M.A.N.	Вольфсбург, земля Нижня Саксонія	Німеччина
+WVN	Volkswagen AG	Вольфсбург, земля Нижня Саксонія	Німеччина
+WVV	Volvo Car Germany GmbH	Кельн	Німеччина
+WVW	Volkswagen Nutzfahrzeuge (автоб.)	Ганновер, земля Нижня Саксонія	Німеччина
+WVW	Volkswagen Nutzfahrzeuge (автоб.)	Ганновер, земля Нижня Саксонія	Німеччина
+X0C	ТагАЗ	Таганрог	Росія
+X0T	МЗ «Тонар»	Губіно, Орєхово-Зуєвський р-н	Росія
+X0Y	Родніковський маш. буд. завод	Родніки, Іванівська область	Росія
+X1A	ГЗСА	Нижній Новгород	Росія
+X1C	АвтоКрАЗ	Кременчук	Україна
+X1D	РАФ	Рига	Латвія
+X1E	КАвЗ	Курган	Росія
+X1F	НефАЗ	Нефтекамськ	Росія
+X1M	ПАЗ	Павлово	Росія
+X1P	Уральський автомобільний завод	Міас	Росія
+X1R	БелАЗ	Жодіно	Білорусь
+X1S	ЗИД	Ковров	Росія
+X1V	Кубань	Краснодар	Росія
+X1X	Купава	Мінськ	Білорусь
+X3E	ОАО Саранський завод автосамоскидів	Саранськ, Республіка Мордовія	Росія
+X42	Iveco-UralAZ Ltd	Міас	Росія
+X45	Вятсько-Полянський завод (скутери)	В'ятські Поляни, Кіровська область	Росія
+X4A, X4X	Автотор	Калінінград	Росія
+X4F, X9F	ЗАТ «Ford Motor Company»	Всеволожськ, Ленінградська обл.	Росія
+X4K	ВАП «Волжанин» (автоб.)	Волзький, Волгоградська область	Росія
+X4U	КамАЗАвтобуспром (автоб.)	Набережні Човни	Росія
+X61	Lada-Tul	Тольятті	Росія
+X6L	Izh Avto International	Іжевськ	Росія
+X7D	РосЛада	Сизрань (Самарська область)	Росія
+X7L	Avtoframos (раніше АЗЛК)	Москва	Росія
+X7M	ТагАЗ	Таганрог (Ростовська область)	Росія
+X7T	ЧАЗ	Чернігів	Україна
+X89/CU2	EvoBus Russland	Москва	Росія
+X8U	Сканія-Пітер	Санкт-Петербург	Росія
+X96, XTH	Горьківський автомобільний завод	Нижній Новгород	Росія
+X9L	GM-AUTOVAZ	Тольятті (Самарська область)	Росія
+X9P	ZAO Volvo Vostok	Москва	Росія
+X9W	Derways Ltd Automobile Company	Черкеськ (Карачаєво-Черкесія)	Росія
+XL9/003	Bova BV	Валкенсвард, пров. Північний Брабант	Нідерланди
+XL9/320	Autobusfabriek Bova	Валкенсвард, пров. Північний Брабант	Нідерланди
+XLA	Van Doorne'S Bedrijfswagenfabriek Daf B	Ейндховен, пров. Північний Брабант	Нідерланди
+XLB	Netherlands Car BV (Volvo)	Гелмонд, пров. Північний Брабант	Нідерланди
+XLB	Netherlands Car BV	Гелмонд, пров. Північний Брабант	Нідерланди
+XLC	Ford Nederland NV	Амстердам	Нідерланди
+XLE	Scania Nederland BV	Зволле, провінція Оверейсел	Нідерланди
+XLR	DAF NV (вант.)	Ейндховен, пров. Північний Брабант	Нідерланди
+XLV	DAF Bus BV	Валкенсваард, пров. Північний Брабант	Нідерланди
+XMC, XMD	Netherlands Car BV	Борн, пров. Лімбург	Нідерланди
+XNB, XNC	Mitsubishi Motors Corporation (NedCar)	Борн, пров. Лімбург	Нідерланди
+XSE	ВАТ Ірбітський мотозавод	Ірбіт	Росія
+XSG	ОдАЗ	Одеса	Україна
+XSL	ЛМЗ	Львів	Україна
+XSP	КМЗ	Київ	Україна
+XSW	АТ «5-й КАрЗ»	Київ	Україна
+XTA	АвтоВАЗ	Тольятті	Росія
+XTB	Москвич	Москва	Росія
+XTC	КамАЗ	Набережні Човни	Росія
+XTD	ЛуАЗ	Луцьк	Україна
+XTE	ЗАЗ	Запоріжжя	Україна
+XTF	ВАТ «Голіцинський автобусний завод» (ГолАЗ)	Голіцино, Московська обл.	Росія
+XTG	Анто-Рус	Херсон	Україна
+XTH, X96	ГАЗ	Нижній Новгород	Росія
+XTJ	СеАЗ	Серпухов	Росія
+XTK	ИжАвто	Іжевськ	Росія
+XTM	МАЗ	Мінськ	Білорусь
+XTP	ММЗ	Митищі	Росія
+XTT	УАЗ	Ульяновськ	Росія
+XTU	ТролЗа (ЗиУ) (тролейбуси)	Енгельс	Росія
+XTV	Луганський автоскладальний завод	Луганськ	Україна
+XTW	ЛАЗ	Львів	Україна
+XTX	ОдАЗ	Одеса	Україна
+XTY	ЛиАЗ	Лікіно-Дульово	Росія
+XTZ	ЗиЛ	Москва	Росія
+XUF	General Motors Auto	Санкт-Петербург	Росія
+XWB	UZ-Daewoo Auto	Асака	Узбекистан
+XWF	Автотор	Калінінград	Росія
+XWK	ИжАвто	Іжевськ (Удмуртська республіка)	Росія
+XWN	Армор Груп	Нижній Новгород	Росія
+XWW	Азія-Авто	Усть-Каменогорськ	Казахстан
+XWW	Cadillac (Азія-Авто)	Усть-Каменогорськ	Казахстан
+Y3B	БелАЗ	Жодіно	Білорусь
+Y3C	МоАЗ	Могильов	Білорусь
+Y3J	БКМ	Мінськ	Білорусь
+Y3M	МАЗ	Мінськ	Білорусь
+Y3N	Join-Stock Company Maz-Man	Мінськ	Білорусь
+Y4F	Ford Union	Мінськ, (с. Абчак, Мінська область)	Білорусь
+Y69	Богдан-Спецавтотехніка	Черкаси	Україна
+Y69	Будмаш Київ	Київ	Україна
+Y69	Тітал (пожежні)	Київ	Україна
+Y6A	АвтоКрАЗ	Кременчук	Україна
+Y6D	ЗАЗ	Запоріжжя	Україна
+Y6J	Черкаський авторемонтний завод	Черкаси	Україна
+Y6L	ЛуАЗ	Луцьк	Україна
+Y6R	Анто-Рус	Херсон	Україна
+Y6V	ПІІ Кітпред	Київ	Україна
+Y79	ГалАЗ	Львів	Україна
+Y79	Богдан-Спецавтотехніка	Черкаси	Україна
+Y7A	АвтоКрАЗ	Кременчук	Україна
+Y7B	Черкаський автобус	Черкаси	Україна
+Y7C	Кременчуцький автоскладальний завод	Кременчук	Україна
+Y7F, Y7K	БАЗ (автоб.)	Бориспіль	Україна
+Y7K	КМЗ	Київ	Україна
+Y89	Південмаш (тролейбуси)	Дніпропетровськ	Україна
+Y8A	ЛАЗ	Львів	Україна
+Y8A	ОдАЗ	Одеса	Україна
+YAR	Toyota Motor Europe NV/SA	Брюссель	Бельгія
+YB1 — YB3	Volvo Europa NV	Гент, провінція Східна Фландрія	Бельгія
+YBW	Volkswagen Bruxelles SA	Брюссель	Бельгія
+YC1	Honda Belgium NV	Алст пров. Східна Фландрія	Бельгія
+YCM	Mazda Motor Europe GmbH	Вілворде, провінція Фламандський Брабант	Бельгія
+YF0	Ford-Werke	Генк, пров. Лімбург	Бельгія
+YK1, YK9	Saab	Уусікаупункі	Фінляндія
+YK7	Sisu Auto Trucks Oy	Расеборг (містечко Кіріяа), пров. Уусімаа	Фінляндія
+YK9/008	Lahden Autokori Oy (автобуси)	Лахті, провінція Пяйят-Гяме	Фінляндія
+YS2	Scania AB	Седертельє, лен Стокгольм	Швеція
+YS3	Saab	Тролльгеттан	Швеція
+YS4	Scania AB (автобуси)	Катрінегольм, лен Седерманланд	Швеція
+YSC	Caddilac (Saab)	Тролльгеттан	Швеція
+YV1, YV4	Volvo Car Corporation	Ґетеборг	Швеція
+YV2, YV6	Volvo Truck Corporation	Ґетеборг	Швеція
+YV3, YV5	AB Volvo Bus Corporation	Ґетеборг	Швеція
+Z7G	ТОВ «Соллерс-Єлабуга»	Єлабуга	Росія
+Z7T	РоАЗ	Ростов-на-Дону	Росія
+Z8N	Ниссан Мэнуфэкчуринг Рус ООО	Петербург (р-н Кам'янка), Ленінградська обл.	Росія
+Z8T	PCMA Rus LLC	Калуга Калузька обл	Росія
+Z94	Hyundai Motor Manufacturing Russia	Сестрорецьк, Санкт-Петербург	Росія
+ZA9/A23	Man-Meccanica SpA	Мазера-ді-Падуя, пров. Падуя	Італія
+ZA9/D39	Bugatti Automobili S.P.A.	Кампогалліано	Італія
+ZA9/H92	Subaru Italia SpA (спорт.)	Ала провінція Тренто	Італія
+ZAA — ZAD	Alfa Romeo	Турин	Італія
+ZAR, ZAW	Alfa Romeo	Турин	Італія
+ZAM, ZC2	Officine Alfieri Maserati Spa, Chrysler	Модена	Італія
+ZBB	Carrozzeria Bertone Spa	Грульяско, провінція Турин	Італія
+ZCG	MV Agusta Motor SpA (мото)	Варезе, пров. Варезе	Італія
+ZDC	Honda Italia Industriales SpA	Атесса, провінція К'єті	Італія
+ZDF	Ferrari (Ferrari Dino)	Модена	Італія
+ZES	Bimoto S p A	Ріміні, провінція Ріміні	Італія
+ZFA — ZFD	Fiat S.p.A.	Турин	Італія
+ZFF	Ferrari	Маранелло	Італія
+ZFR	Pininfarina	Турин	Італія
+ZHV	MV Agusta SpA (мото)	Варезе, пров. Варезе	Італія
+ZHW	Lamborghini	Сант'Агата-Болоньєзе	Італія
+ZJE	Subaru Italia SpA	Ала, провінція Тренто	Італія
+ZK5	Hyundai Automobili Italia Importazioni	Мілан	Італія
+ZK7	Martin Motors	Роццано, Мілан	Італія
+ZK7	Martin Motors	Роццано, Мілан	Італія
+ZKG	Chevrolet Italia	Рим	Італія
+ZKU	General Motors Italia S.r.l.	Рим	Італія
+ZL5	Nissan Italia Srl	Капена, провінція Рим	Італія
+ZLA — ZLD	Lancia	Турин	Італія
+ZLE	Suzuki Italia S.p.A.	Турин	Італія
+ZMJ	Ford Italia S.p.A.	Рим	Італія
+ZY1	Adria Mobil (авто-дачі, прич.-дачі)	Ново Место	Словенія
+ZY2	Revoz	Ново Место	Словенія
+  */

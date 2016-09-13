@@ -32,12 +32,12 @@ console.log(vin.decode("WVWZZZ3CZEE140287"));
 /* { wmi: 'WVW',
      vds: 'ZZZ3CZ',
      vis: 'EE140287',
-     SequentialNumber: '140287',
+     sequentialNumber: '140287',
      check: 'Z',
      continent: 'Europe',
      country: 'West Germany',
      manufacturer: 'Volkswagen',
-     modelyear: 2014 }
+     modelYear: 2014 }
 */
 ```
 
