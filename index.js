@@ -1,4 +1,4 @@
-const vinRegex      = /^([0-9A-HJ-NPR-Z]{9})([A-HJ-NPR-TV-Z1-9])([0-9A-HJ-NPR-Z])([0-9A-HJ-NPR-Z]{2}\d{4})$/,
+const vinRegex      = /^([0-9A-HJ-NPR-Z]{9})([A-HJ-NPR-TV-Y1-9])([0-9A-HJ-NPR-Z])([0-9A-HJ-NPR-Z]{2}\d{4})$/,
       continents    = require('./db/continents'),
       countries     = require('./db/countries'),
       modelyears    = require('./db/modelyears'),
