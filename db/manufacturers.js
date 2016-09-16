@@ -1,4 +1,9 @@
 module.exports = {
+    "MHA": 'PT. Central Sole Agency (Volvo)',
+    "93V": 'Audi Brazil',
+    "1V1": 'Volkswagen USA (commercials)',
+    "WV3": 'Volkswagen Trucks',
+    "WVG": 'Volkswagen SUVs (Gelande)',
     "935": "Citroën Brazil",
     "936": "Peugeot Brazil",
     "4TL": "Toyota",

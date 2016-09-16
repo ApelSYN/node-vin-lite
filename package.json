@@ -1,6 +1,6 @@
 {
   "name": "vin-lite",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "VIN (Vehicle Identification Number) Checker Lite",
   "main": "index.js",
   "scripts": {
