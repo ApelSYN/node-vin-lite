@@ -250,7 +250,6 @@ module.exports = {
         if (typeof result.engine === 'object') {
             result.engine = rangeYearSelector(result.engine,modelYear);
         }
-        console.log(engineCode);
 
         digit8Desc =  rangeYearSelector(digit8Arr,modelYear);
         result[digit8Desc.description] = digit8Desc.data[digit8];

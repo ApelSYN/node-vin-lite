@@ -56,6 +56,6 @@ console.log(vin.USAValidate("YV1TS592861433393")); // true
 history
 =======
 
-  * v3.0.0 - Add USA check digit validation. Add additional information decoder for Volkswagen and Volvo.
+  * v3.0.1 - Add USA check digit validation. Add additional information decoder for Volkswagen and Volvo.
   * v2.1.0 - Added all codes xUSSR manufacturers
   * v2.0.0 - Slightly changed the format of the object that returns the decode method.  
