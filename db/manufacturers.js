@@ -1056,6 +1056,30 @@ module.exports = {
     "JN1": "Nissan",
     "5FU": "Honda USA-Alabama",
 
+    //German manufacturer
+    //Source: https://en.wikipedia.org/wiki/Vehicle_identification_number
+
+    "WAP": "Alpina",
+    "WBX": "BMW",
+    "WDC": "DaimlerChrysler AG/Daimler AG",
+    "WDD": "DaimlerChrysler AG/Daimler AG",
+    "WMX": "DaimlerChrysler AG/Daimler AG",
+    "WEB": "EvoBus",
+    "WF0": "Ford of Europe",
+    "WJM": "Iveco",
+    "WJR": "Irmscher",
+    "WKK": "Karl Kässbohrer Fahrzeugwerke",
+    "WMA": "MAN",
+    "WME": "Smart",
+    "WP0": "Porsche car",
+    "WP1": "Porsche SUV",
+    "WUA": "Quattro",
+    "WVG": "Volkswagen",
+    "WV2": "Volkswagen Commercial Vehicles",
+    "W09": "Ruf Automobile",
+    "W0L": "Opel/Vauxhall",
+    "W0SV": "Opel Special Vehicles",
+
     // xUSSR manufacturer
     // list source: https://uk.wikipedia.org/wiki/Ідентифікаційний_номер_транспортного_засобу
 
